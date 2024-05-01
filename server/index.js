@@ -30,6 +30,6 @@ express()
 
   .get("/accessToken", getAccessToken)
   .get("/playlist", getPlaylist)
-  .get("/kpop", getKpop)
+  .get("/KPOP", getKpop)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

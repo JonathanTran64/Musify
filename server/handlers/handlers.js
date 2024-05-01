@@ -5,15 +5,9 @@ const request = require("request");
 require("dotenv").config();
 const { client_secret, MONGO_URI } = process.env;
 
-let accessToken;
-let tokenExpirationTime;
+console.log(MONGO_URI);
 
 const getAccessToken = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
-  await client.connect();
-
-  const db = client.db("Data");
-
   const client_id = "40a54b6f450144acb4b972107fe0e1b9";
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
@@ -30,11 +24,6 @@ const getAccessToken = async (req, res) => {
 
   request.post(authOptions, async function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      accessToken = body.access_token;
-      console.log(accessToken);
-      const ob = { _id: uuidv4(), token: accessToken };
-
-      await db.collection("Token").insertOne(ob);
       res.json(body);
     } else {
       res.status(response.statusCode).json({ error: error || body.error });
@@ -42,18 +31,19 @@ const getAccessToken = async (req, res) => {
   });
 };
 
-// const refreshTokenIfNeeded = () => {
-//   if (!accessToken || Date.now() >= tokenExpirationTime) {
-//     getAccessToken();
-//   }
-// };
+const getPlaylist = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
 
-const getArtist = async (req, res) => {
   try {
-    const artistId = "7F1iAHRYxR3MY7yAEuFqgL";
-    // refreshTokenIfNeeded();
+    await client.connect();
+    const db = client.db("Categories");
+
+    const playlistID = "";
+    const accessToken =
+      "BQAQa8SFKJXPJBybDha90uVzGXVbgflHRGWhlH7G0jtlsRbcZ-XWQmpofRo9iQXOy6B_3sxSTSSHCanH6jOwmbyVnw5mfA0nsSmPFs2zl7sF1p8CLb8";
+
     const response = await fetch(
-      `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
+      `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
       {
         method: "GET",
         headers: {
@@ -63,45 +53,68 @@ const getArtist = async (req, res) => {
     );
 
     const data = await response.json();
-    const randomSong =
-      data.tracks[Math.floor(Math.random() * data.tracks.length)];
+    const { items } = data;
 
-    const songName = randomSong.name;
-    const songPreview = randomSong.preview_url;
+    let count = 97;
 
-    res.status(200).json({
-      status: 200,
-      songName,
-      songPreview,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+    for (const obj of items) {
+      const artistName = obj.track.artists[0].name;
+      const songName = obj.track.name;
+      const preview = obj.track.preview_url;
+      const albumCover = obj.track.album.images[2].url;
+      const spotifyLink = obj.track.external_urls.spotify;
 
-const getTrack = async (req, res) => {
-  try {
-    const trackId = "11dFghVXANMlKmJXsNCbNl";
-    const response = await fetch(
-      `https://api.spotify.com/v1/tracks/${trackId}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+      if (preview === null) {
+        continue;
       }
-    );
 
-    const data = await response.json();
-    console.log(data);
+      const info = {
+        _id: count + 1,
+        artistName: artistName,
+        songName: songName,
+        preview: preview,
+        albumCover: albumCover,
+        spotifyLink: spotifyLink,
+      };
+
+      await db.collection("Kpop").insertOne(info);
+      count++;
+    }
 
     res.status(200).json({
       status: 200,
-      track: data,
+      items,
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    await client.close();
   }
 };
 
-module.exports = { getAccessToken, getArtist, getTrack };
+const getKpop = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
+  try {
+    await client.connect();
+    const db = client.db("Categories");
+
+    const song = await db
+      .collection("Kpop")
+      .findOne({ _id: Math.floor(Math.random() * 150) });
+
+    if (song) {
+      res.status(200).json({
+        status: 200,
+        song,
+      });
+    } else {
+      res.status(404).json();
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await client.close();
+  }
+};
+
+module.exports = { getAccessToken, getPlaylist, getKpop };

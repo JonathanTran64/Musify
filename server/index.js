@@ -2,9 +2,15 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { getArtist, getTrack, getAccessToken } = require("./handlers/handlers");
+const {
+  getArtist,
+  getTrack,
+  getAccessToken,
+  getPlaylist,
+  getKpop,
+} = require("./handlers/handlers");
 
-const PORT = 3000;
+const PORT = 4000;
 express()
   .use(function (req, res, next) {
     res.header(
@@ -23,7 +29,7 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   .get("/accessToken", getAccessToken)
-  .get("/artist", getArtist)
-  .get("/track", getTrack)
+  .get("/playlist", getPlaylist)
+  .get("/kpop", getKpop)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

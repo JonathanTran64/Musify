@@ -1,10 +1,20 @@
-const request = require("request");
+const { MongoClient } = require("mongodb");
 const fetch = require("node-fetch");
+const { v4: uuidv4 } = require("uuid");
+const request = require("request");
+require("dotenv").config();
+const { client_secret, MONGO_URI } = process.env;
 
-const getToken = async (req, res) => {
+let accessToken;
+let tokenExpirationTime;
+
+const getAccessToken = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
+  await client.connect();
+
+  const db = client.db("Data");
+
   const client_id = "40a54b6f450144acb4b972107fe0e1b9";
-  const client_secret = "dd2da9686ea44f1c992180854fe286ad";
-
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
     headers: {
@@ -18,8 +28,13 @@ const getToken = async (req, res) => {
     json: true,
   };
 
-  request.post(authOptions, function (error, response, body) {
+  request.post(authOptions, async function (error, response, body) {
     if (!error && response.statusCode === 200) {
+      accessToken = body.access_token;
+      console.log(accessToken);
+      const ob = { _id: uuidv4(), token: accessToken };
+
+      await db.collection("Token").insertOne(ob);
       res.json(body);
     } else {
       res.status(response.statusCode).json({ error: error || body.error });
@@ -27,12 +42,16 @@ const getToken = async (req, res) => {
   });
 };
 
+// const refreshTokenIfNeeded = () => {
+//   if (!accessToken || Date.now() >= tokenExpirationTime) {
+//     getAccessToken();
+//   }
+// };
+
 const getArtist = async (req, res) => {
   try {
     const artistId = "7F1iAHRYxR3MY7yAEuFqgL";
-    const accessToken =
-      "BQBdMI8QtF45_qiPWrySn5StSBaqrFHTxgxAt2ItnaX2G1javgU-8esmUy6vV5TtJvazQI3q1_39rif9BrbE8DPI_Y2lT7ddhxua8i4jgV69M3gCKxM";
-
+    // refreshTokenIfNeeded();
     const response = await fetch(
       `https://api.spotify.com/v1/artists/${artistId}/top-tracks`,
       {
@@ -63,9 +82,6 @@ const getArtist = async (req, res) => {
 const getTrack = async (req, res) => {
   try {
     const trackId = "11dFghVXANMlKmJXsNCbNl";
-    const accessToken =
-      "BQBdMI8QtF45_qiPWrySn5StSBaqrFHTxgxAt2ItnaX2G1javgU-8esmUy6vV5TtJvazQI3q1_39rif9BrbE8DPI_Y2lT7ddhxua8i4jgV69M3gCKxM";
-
     const response = await fetch(
       `https://api.spotify.com/v1/tracks/${trackId}`,
       {
@@ -88,4 +104,4 @@ const getTrack = async (req, res) => {
   }
 };
 
-module.exports = { getToken, getArtist, getTrack };
+module.exports = { getAccessToken, getArtist, getTrack };

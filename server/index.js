@@ -2,7 +2,8 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { getToken, getArtist, getTrack } = require("./handlers");
+const { getArtist, getTrack, getAccessToken } = require("./handlers/handlers");
+
 const PORT = 3000;
 express()
   .use(function (req, res, next) {
@@ -21,7 +22,7 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  .get("/getAccessToken", getToken)
+  .get("/accessToken", getAccessToken)
   .get("/artist", getArtist)
   .get("/track", getTrack)
 

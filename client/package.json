@@ -6,6 +6,7 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "fuzzy-search": "^3.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.23.0",

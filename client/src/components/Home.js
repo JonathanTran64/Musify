@@ -9,7 +9,13 @@ const Home = () => {
   return (
     <Container>
       {genres.map((obj) => {
-        return <Genre genre={obj.genre} image={obj.image} />;
+        return (
+          <Genre
+            key={obj.genre + "genre"}
+            genre={obj.genre}
+            image={obj.image}
+          />
+        );
       })}
     </Container>
   );

@@ -117,4 +117,31 @@ const getKpop = async (req, res) => {
   }
 };
 
-module.exports = { getAccessToken, getPlaylist, getKpop };
+const getAllKpop = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
+  try {
+    await client.connect();
+    const db = client.db("Categories");
+
+    const song = await db.collection("Kpop").find().toArray();
+
+    const songArray = song.map((obj) => {
+      return `${obj.artistName} - ${obj.songName}`;
+    });
+
+    if (song) {
+      res.status(200).json({
+        status: 200,
+        songArray,
+      });
+    } else {
+      res.status(404).json();
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await client.close();
+  }
+};
+
+module.exports = { getAccessToken, getPlaylist, getKpop, getAllKpop };

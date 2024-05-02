@@ -8,6 +8,7 @@ const {
   getAccessToken,
   getPlaylist,
   getKpop,
+  getAllKpop,
 } = require("./handlers/handlers");
 
 const PORT = 4000;
@@ -31,5 +32,6 @@ express()
   .get("/accessToken", getAccessToken)
   .get("/playlist", getPlaylist)
   .get("/KPOP", getKpop)
+  .get("/KPOPAll", getAllKpop)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

@@ -151,6 +151,29 @@ const SongGame = () => {
           <>
             <audio ref={audioRef} src={song.preview} />
 
+            {/* SUGGESTIONS */}
+            <ButtonSuggestionsWrapper>
+              <Flex>
+                {suggestions
+                  ? suggestions.slice(0, 10).map((song, i) => {
+                      return (
+                        <div key={song + i}>
+                          <div>
+                            <ButtonSuggestions
+                              onClick={() => {
+                                setInputGuess(song + " ");
+                              }}
+                            >
+                              {song}
+                            </ButtonSuggestions>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </Flex>
+            </ButtonSuggestionsWrapper>
+
             {/* AUDIO BAR */}
             <ProgressBar>
               <Skipped
@@ -202,27 +225,6 @@ const SongGame = () => {
               </PlayButton>
             </PlayButtonWrapper>
 
-            {/* SUGGESTIONS */}
-            <ButtonSuggestionsWrapper>
-              {suggestions
-                ? suggestions.slice(0, 10).map((song, i) => {
-                    return (
-                      <div key={song + i}>
-                        <div>
-                          <ButtonSuggestions
-                            onClick={() => {
-                              setInputGuess(song + " ");
-                            }}
-                          >
-                            {song}
-                          </ButtonSuggestions>
-                        </div>
-                      </div>
-                    );
-                  })
-                : ""}
-            </ButtonSuggestionsWrapper>
-
             {/* GUESS INPUT */}
             <div>
               <InputGuess
@@ -232,21 +234,21 @@ const SongGame = () => {
                 onChange={(e) => {
                   setInputGuess(e.target.value);
                 }}
-              ></InputGuess>
+              />
+
+              {/* SKIP BUTTON */}
+              <WrapperSkipSubmit>
+                {skip !== 6 ? (
+                  <button onClick={handleSkip}>S K I P ( + {skip} s )</button>
+                ) : (
+                  <Link to={`/song/${genre}/${song.songName}`}>
+                    <button>S K I P</button>
+                  </Link>
+                )}
+
+                <button onClick={handleSubmit}>SUBMIT</button>
+              </WrapperSkipSubmit>
             </div>
-
-            {/* SKIP BUTTON */}
-            <WrapperSkipSubmit>
-              {skip !== 6 ? (
-                <button onClick={handleSkip}>S K I P ( + {skip} s )</button>
-              ) : (
-                <Link to={`/song/${genre}/${song.songName}`}>
-                  <button>S K I P</button>
-                </Link>
-              )}
-
-              <button onClick={handleSubmit}>SUBMIT</button>
-            </WrapperSkipSubmit>
           </>
         ) : (
           <h1>load...</h1>
@@ -257,8 +259,7 @@ const SongGame = () => {
 };
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
@@ -329,28 +330,17 @@ const PlayButtonImage = styled.img`
   width: 35px;
 `;
 
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  height: 334px;
+`;
+
 const ButtonSuggestionsWrapper = styled.div`
   position: absolute;
-  bottom: 287px;
-  width: 700px;
-
-  @media (max-height: 768px) {
-    bottom: 102px;
-  }
-
-  @media (max-height: 900px) {
-    bottom: 233px;
-  }
-
-  @media (max-height: 1024px) {
-    bottom: 358px;
-  }
-
-  @media (max-height: 1080px) {
-    bottom: 414px;
-  }
+  z-index: 99;
 `;
-const ButtonSuggestionsWrapper2 = styled.div``;
+
 const ButtonSuggestions = styled.button`
   display: flex;
   padding: 7px 0px 7px 20px;

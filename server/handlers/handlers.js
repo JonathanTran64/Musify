@@ -1,23 +1,19 @@
 const fetch = require("node-fetch");
 const { getAccessToken } = require("../handlers/spotifyToken");
 
-const kpopArrayIds = [
-  "3Ir5YWemOTGRRfXgROrsDV",
-  "0jB4ANR4ox65etDMnxvGLp",
-  "2EoheVFjqIxgJMb8VnDRtZ",
-  "37i9dQZF1DX9tPFwDMOaN1",
-  "6tQDMnj0qImEl6AKA1Uv74",
-];
-
-const getRandomKpopPlaylistId = () => {
-  const randomIndex = Math.floor(Math.random() * kpopArrayIds.length);
-  return kpopArrayIds[randomIndex];
-};
-
 const getKpop = async (req, res) => {
+  const kpopArrayIds = [
+    "3Ir5YWemOTGRRfXgROrsDV",
+    "0jB4ANR4ox65etDMnxvGLp",
+    "2EoheVFjqIxgJMb8VnDRtZ",
+    "37i9dQZF1DX9tPFwDMOaN1",
+    "6tQDMnj0qImEl6AKA1Uv74",
+  ];
+
   try {
     const accessToken = await getAccessToken();
-    const playlistID = getRandomKpopPlaylistId();
+    const playlistID =
+      kpopArrayIds[Math.floor(Math.random() * kpopArrayIds.length)];
 
     const response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
@@ -59,35 +55,7 @@ const getKpop = async (req, res) => {
       spotifyLink: spotifyLink,
     };
 
-    res.status(200).json({
-      status: 200,
-      song: info,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getAllKpop = async (req, res) => {
-  try {
-    const accessToken = await getAccessToken();
-    const playlistID = getRandomKpopPlaylistId();
-
-    console.log(playlistID);
-
-    const response = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-    const { items } = data;
-
+    // Get all songs in a artist - song format
     let songsArray = [];
     for (const object of items) {
       const artistName = object.track.artists[0].name;
@@ -95,19 +63,14 @@ const getAllKpop = async (req, res) => {
       songsArray.push(`${artistName} - ${songName}`);
     }
 
-    if (songsArray) {
-      res.status(200).json({
-        status: 200,
-        songsArray,
-      });
-    }
+    res.status(200).json({
+      status: 200,
+      song: info,
+      songsArray,
+    });
   } catch (error) {
     console.log(error);
-    res.status(404).json({
-      status: 404,
-      error: "Could not find songs array",
-    });
   }
 };
 
-module.exports = { getKpop, getAllKpop };
+module.exports = { getKpop };

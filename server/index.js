@@ -2,9 +2,7 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { getKpop, getAllKpop } = require("./handlers/handlers");
-
-const { getAccessToken } = require("./handlers/spotifyToken");
+const { getKpop } = require("./handlers/handlers");
 
 const PORT = 4000;
 express()
@@ -24,8 +22,6 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  .get("/accessToken", getAccessToken)
   .get("/KPOP", getKpop)
-  .get("/KPOPAll", getAllKpop)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

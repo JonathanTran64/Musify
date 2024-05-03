@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const { getAccessToken } = require("../handlers/spotifyToken");
 
+// Fetch a playlist with give playlist Id
 const getSong = async (req, res, playlist) => {
   try {
     const accessToken = await getAccessToken();
@@ -55,6 +56,7 @@ const getSong = async (req, res, playlist) => {
   }
 };
 
+// KPOP
 const getKpop = async (req, res) => {
   const kpopArrayIds = [
     "3Ir5YWemOTGRRfXgROrsDV",
@@ -84,6 +86,7 @@ const getKpop = async (req, res) => {
   }
 };
 
+// POP
 const getPop = async (req, res) => {
   const popArrayIds = [
     "6mtYuOxzl58vSGnEDtZ9uB",
@@ -111,6 +114,7 @@ const getPop = async (req, res) => {
   }
 };
 
+// HIP-HOP
 const getHipHop = async (req, res) => {
   const popArrayIds = [
     "0dMexqq0XIWS3QJ74z3ZhD",
@@ -138,6 +142,7 @@ const getHipHop = async (req, res) => {
   }
 };
 
+// COUNTRY
 const getCountry = async (req, res) => {
   const popArrayIds = [
     "4Jb4PDWREzNnbZcOHPcZPy",
@@ -164,4 +169,58 @@ const getCountry = async (req, res) => {
   }
 };
 
-module.exports = { getKpop, getPop, getHipHop, getCountry };
+// R&B
+const getRnB = async (req, res) => {
+  const popArrayIds = [
+    "5zCdhPJHI9kgYsgkSBEWT0",
+    "2T3BSpqN34Z4sppHDNWoeE",
+    "37i9dQZF1DX2WkIBRaChxW",
+  ];
+
+  try {
+    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    if (song) {
+      res.status(200).json({
+        status: 200,
+        song,
+        songsArray,
+        message: "success",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      error: "Internal Server Error",
+    });
+  }
+};
+
+// ROCK
+const getRock = async (req, res) => {
+  const popArrayIds = [
+    "1ti3v0lLrJ4KhSTuxt4loZ",
+    "0ImbTL9gm01nStEsaCmj16",
+    "37i9dQZF1EQpj7X7UK8OOF",
+  ];
+
+  try {
+    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    if (song) {
+      res.status(200).json({
+        status: 200,
+        song,
+        songsArray,
+        message: "success",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      error: "Internal Server Error",
+    });
+  }
+};
+
+module.exports = { getKpop, getPop, getHipHop, getCountry, getRnB, getRock };

@@ -7,6 +7,8 @@ const {
   getPop,
   getHipHop,
   getCountry,
+  getRnB,
+  getRock,
 } = require("./handlers/handlers");
 
 const PORT = 4000;
@@ -31,5 +33,7 @@ express()
   .get("/pop", getPop)
   .get("/hip-hop", getHipHop)
   .get("/country", getCountry)
+  .get("/r&b", getRnB)
+  .get("/rock", getRock)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

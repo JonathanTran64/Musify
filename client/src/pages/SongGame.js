@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FuzzySearch from "fuzzy-search";
 // images
-import playButtonImage from "../assets/playbutton.png";
-import stopButtonImage from "../assets/stopbutton.png";
+import playButtonWhiteImage from "../assets/playbuttonwhite.png";
+import stopButtonWhiteImage from "../assets/stopbuttonwhite.png";
 // components
-import NavBar from "../components/NavBar";
 import GuessBox from "../components/GuessBox";
 import SongProgressBar from "../components/SongProgessBar";
 import InputSkipSubmit from "../components/InputSkipSubmit";
@@ -120,7 +119,7 @@ const SongGame = () => {
 
           {/* SUGGESTIONS */}
           <ButtonSuggestionsWrapper>
-            <Flex>
+            <FlexSuggestions>
               {suggestions
                 ? suggestions.slice(0, 10).map((song, i) => {
                     return (
@@ -138,7 +137,7 @@ const SongGame = () => {
                     );
                   })
                 : ""}
-            </Flex>
+            </FlexSuggestions>
           </ButtonSuggestionsWrapper>
 
           <SongProgressBar isPlaying={isPlaying} count={count} />
@@ -149,7 +148,7 @@ const SongGame = () => {
             <PlayButtonWrapper>
               <PlayButton onClick={handlePlay}>
                 <PlayButtonImage
-                  src={isPlaying ? stopButtonImage : playButtonImage}
+                  src={isPlaying ? stopButtonWhiteImage : playButtonWhiteImage}
                   alt="playButton"
                   $left={isPlaying ? "0px" : "3px"}
                 />
@@ -181,7 +180,7 @@ const SongGame = () => {
 const Container = styled.div`
   padding-top: 30px;
   overflow-x: hidden;
-  background-color: #e9c46a;
+  background-color: #212529;
   height: 100vh;
 `;
 
@@ -197,6 +196,10 @@ const SecondsPLayButtonWrapper = styled.div`
   align-items: center;
   width: 700px;
   margin: 10px auto;
+
+  p {
+    color: white;
+  }
 `;
 
 const PlayButtonWrapper = styled.div`
@@ -205,8 +208,9 @@ const PlayButtonWrapper = styled.div`
 `;
 const PlayButton = styled.button`
   background-color: transparent;
-  padding: 10px 12px;
+  padding: 15px 17px;
   border-radius: 50px;
+  border: 2px white solid;
   cursor: pointer;
 `;
 
@@ -214,11 +218,10 @@ const PlayButtonImage = styled.img`
   position: relative;
   left: ${(props) => props.$left};
   top: 1px;
-  width: 35px;
 `;
 
 //Suggestions styling
-const Flex = styled.div`
+const FlexSuggestions = styled.div`
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
@@ -227,7 +230,7 @@ const Flex = styled.div`
 const ButtonSuggestionsWrapper = styled.div`
   position: relative;
   z-index: 99;
-  top: 99px;
+  top: 96px;
   display: flex;
   height: 3px;
   width: 700px;
@@ -239,18 +242,20 @@ const ButtonSuggestions = styled.button`
   padding: 7px 0px 7px 20px;
   width: 700px;
   height: 33px;
-  border: 1px black solid;
+  border: 1px #6c757d solid;
   border-bottom: 0px;
-  background-color: lightgray;
+  background-color: #212529;
+  color: #e9ecef;
   cursor: pointer;
 
   &:hover {
-    background-color: white;
+    background-color: #6c757d;
   }
 `;
 
 const Loading = styled.h3`
   margin: 0 auto;
   width: 200px;
+  color: white;
 `;
 export default SongGame;

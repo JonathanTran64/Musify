@@ -7,12 +7,27 @@ const SongProgressBar = ({ isPlaying, count }) => {
       <ProgressBarWrapper>
         <ProgressBar>
           {/* Line Seconds Limit */}
-          <LineWrapper>
-            <Line $width={"50px"}></Line>
-            <Line $width={"95px"}></Line>
-            <Line $width={"185px"}></Line>
-            <Line $width={"315px"}></Line>
-            <Line $width={"487px"}></Line>
+          <LineWrapper $borderColor={count === 5 ? "#dee2e6" : "#6c757d"}>
+            <Line
+              $width={"50px"}
+              $borderColor={count === 0 ? "#dee2e6" : "#6c757d"}
+            ></Line>
+            <Line
+              $width={"95px"}
+              $borderColor={count === 1 ? "#dee2e6" : "#6c757d"}
+            ></Line>
+            <Line
+              $width={"185px"}
+              $borderColor={count === 2 ? "#dee2e6" : "#6c757d"}
+            ></Line>
+            <Line
+              $width={"315px"}
+              $borderColor={count === 3 ? "#dee2e6" : "#6c757d"}
+            ></Line>
+            <Line
+              $width={"487px"}
+              $borderColor={count === 4 ? "#dee2e6" : "#6c757d"}
+            ></Line>
           </LineWrapper>
           {/* RED BAR ANIMATION */}
           <Player $isPlaying={isPlaying}></Player>
@@ -54,13 +69,13 @@ const Skipped = styled.div`
   position: absolute;
   width: ${(props) => props.$width};
   height: 15px;
-  background-color: #202020;
+  background-color: #495057;
 `;
 
 const ProgressBarWrapper = styled.div`
   display: flex;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px #f8f9fa solid;
   width: 100%;
   height: 15px;
 `;
@@ -75,7 +90,7 @@ const ProgressBar = styled.div`
 const Player = styled.div`
   position: relative;
   bottom: 15px;
-  background-color: #ffee32;
+  background-color: #adc178;
   width: 5px;
   height: 100%;
   animation: ${({ $isPlaying }) => ($isPlaying ? "slide" : "none")} 16s linear;
@@ -94,13 +109,14 @@ const LineWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  border-right: 1px ${(props) => props.$borderColor} solid;
 `;
 
 const Line = styled.div`
   position: absolute;
   height: 100%;
   width: ${(props) => props.$width};
-  border-right: 1px black solid;
+  border-right: 1px ${(props) => props.$borderColor} solid;
   z-index: 2;
 `;
 

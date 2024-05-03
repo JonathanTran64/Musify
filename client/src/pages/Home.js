@@ -19,19 +19,27 @@ const Home = () => {
     { genre: "ROCK", image: rockImage },
   ];
   return (
-    <Container>
-      {genres.map((obj) => {
-        return (
-          <Genre
-            key={obj.genre + "genre"}
-            genre={obj.genre}
-            image={obj.image}
-          />
-        );
-      })}
-    </Container>
+    <Wrapper>
+      <Container>
+        {genres.map((obj) => {
+          return (
+            <Genre
+              key={obj.genre + "genre"}
+              genre={obj.genre}
+              image={obj.image}
+            />
+          );
+        })}
+      </Container>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  background-color: #212529;
+  height: 100vh;
+  overflow: hidden;
+`;
 
 const Container = styled.div`
   display: flex;

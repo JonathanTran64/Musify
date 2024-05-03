@@ -5,18 +5,18 @@ import skipIcon from "../assets/skipIcon.png";
 const GuessBox = ({ active, answer }) => {
   return (
     <Container
+      $color={answer !== "S K I P P E D" ? "#e9ecef" : "#6c757d"}
       $borderColor={
         active === "active"
-          ? "green"
+          ? "#f8f9fa"
           : answer !== "S K I P P E D" && answer
           ? "red"
-          : "black"
+          : "#6c757d"
       }
-      $border={active === "active" ? "2px" : "1px"}
     >
       <FlexBox>
         {answer === "S K I P P E D" ? (
-          <img src={skipIcon} alt="skipIcon" />
+          <EmptyBox></EmptyBox>
         ) : answer ? (
           <img src={xIcon} alt="xIcon" />
         ) : null}
@@ -29,12 +29,13 @@ const GuessBox = ({ active, answer }) => {
 const Container = styled.div`
   display: flex;
   margin-bottom: 7px;
-  border: ${(props) => props.$border} ${(props) => props.$borderColor} solid;
+  border: 1px ${(props) => props.$borderColor} solid;
   height: 35px;
-  background-color: #d6d6d6;
+  background-color: #343a40;
 
   p {
     margin: 0;
+    color: ${(props) => props.$color};
   }
 `;
 
@@ -47,6 +48,14 @@ const FlexBox = styled.div`
     width: 30px;
     margin-right: 10px;
   }
+`;
+
+const EmptyBox = styled.div`
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 3px;
+  border-radius: 4px;
+  border: 2px #6c757d solid;
 `;
 
 export default GuessBox;

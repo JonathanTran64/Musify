@@ -6,7 +6,7 @@ const NavBar = () => {
 const Container = styled.div`
   width: 100%;
   height: 60px;
-
-  background-color: black;
+  background-color: #212529;
+  border-bottom: 1px white solid;
 `;
 export default NavBar;

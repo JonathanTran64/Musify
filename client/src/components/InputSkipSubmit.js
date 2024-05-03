@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // images
-import searchIcon from "../assets/searchIcon.png";
+import searchIconWhiteImage from "../assets/searchiconwhite.png";
 
 const InputSkipSubmit = ({
   song,
@@ -71,10 +71,10 @@ const InputSkipSubmit = ({
       {/* GUESS INPUT */}
       <InputSkipSubmitWrapper>
         <InputWrapper>
-          <SearchIcon src={searchIcon} alt="searchIcon" />
+          <SearchIcon src={searchIconWhiteImage} alt="searchIcon" />
           <InputGuess
             type="text"
-            placeholder="Know the song?"
+            placeholder="Know the song? Search for the title!"
             value={inputGuess}
             onChange={(e) => {
               setInputGuess(e.target.value);
@@ -94,7 +94,7 @@ const InputSkipSubmit = ({
             </Link>
           )}
           {/* SUBMIT BUTTON */}
-          <SubmitButton onClick={handleSubmit}>SUBMIT</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>S U B M I T</SubmitButton>
         </WrapperSkipSubmit>
       </InputSkipSubmitWrapper>
     </div>
@@ -115,32 +115,50 @@ const InputWrapper = styled.div`
 const SearchIcon = styled.img`
   position: absolute;
   width: 22px;
-  top: 12px;
+  top: 18px;
   left: 10px;
 `;
 const InputGuess = styled.input`
   width: 655px;
   height: 40px;
-  padding-left: 40px;
+  padding: 7px 0px 7px 40px;
+  background-color: #212529;
+  border: 1px #6c757d solid;
+  color: #f8f9fa;
+
+  &::placeholder {
+    color: #adb5bd;
+  }
 `;
 
 const WrapperSkipSubmit = styled.div`
-  margin-top: 10px;
-  height: 50px;
+  margin-top: 20px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
 `;
 
 const SkipButton = styled.button`
-  /* padding: 10px 10px; */
+  border: none;
+  border-radius: 3px;
+  background-color: #adb5bd;
+  cursor: pointer;
+  color: #212529;
+  font-weight: bold;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
-const SkipButtonLink = styled.button`
+const SkipButtonLink = styled(SkipButton)`
   height: 100%;
   width: 100px;
 `;
 
-const SubmitButton = styled.button`
-  width: 90px;
+const SubmitButton = styled(SkipButton)`
+  width: 100px;
+  background-color: #adc178;
 `;
 export default InputSkipSubmit;

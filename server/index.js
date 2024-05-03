@@ -2,7 +2,12 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const { getKpop } = require("./handlers/handlers");
+const {
+  getKpop,
+  getPop,
+  getHipHop,
+  getCountry,
+} = require("./handlers/handlers");
 
 const PORT = 4000;
 express()
@@ -22,6 +27,9 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  .get("/KPOP", getKpop)
+  .get("/kpop", getKpop)
+  .get("/pop", getPop)
+  .get("/hip-hop", getHipHop)
+  .get("/country", getCountry)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

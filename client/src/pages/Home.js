@@ -6,6 +6,8 @@ import kpopImage from "../assets/kpop.jpg";
 import popImage from "../assets/pop.png";
 import hiphopImage from "../assets/hip-hop.png";
 import countryImage from "../assets/country.png";
+import rnbImage from "../assets/rnb.jpg";
+import rockImage from "../assets/rock.png";
 
 const Home = () => {
   const genres = [
@@ -13,6 +15,8 @@ const Home = () => {
     { genre: "POP", image: popImage },
     { genre: "HIP-HOP", image: hiphopImage },
     { genre: "COUNTRY", image: countryImage },
+    { genre: "R&B", image: rnbImage },
+    { genre: "ROCK", image: rockImage },
   ];
   return (
     <Container>

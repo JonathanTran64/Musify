@@ -5,7 +5,13 @@ import skipIcon from "../assets/skipIcon.png";
 const GuessBox = ({ active, answer }) => {
   return (
     <Container
-      $borderColor={active === "active" ? "green" : "black"}
+      $borderColor={
+        active === "active"
+          ? "green"
+          : answer !== "S K I P P E D" && answer
+          ? "red"
+          : "black"
+      }
       $border={active === "active" ? "2px" : "1px"}
     >
       <FlexBox>

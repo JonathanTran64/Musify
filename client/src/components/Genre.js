@@ -19,7 +19,7 @@ const Container = styled.div`
 
   h2 {
     position: relative;
-    top: 100px;
+    top: 110px;
     margin: 0 auto;
     text-align: center;
     color: white;
@@ -27,9 +27,9 @@ const Container = styled.div`
 
   img {
     width: 300px;
-    height: 170px;
-    border: 2px black solid;
-    border-radius: 20px;
+    height: 190px;
+    border: 1px black solid;
+    border-radius: 10px;
     object-fit: cover;
   }
 

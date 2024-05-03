@@ -2,14 +2,9 @@
 
 const express = require("express");
 const morgan = require("morgan");
-const {
-  getArtist,
-  getTrack,
-  getAccessToken,
-  getPlaylist,
-  getKpop,
-  getAllKpop,
-} = require("./handlers/handlers");
+const { getKpop, getAllKpop } = require("./handlers/handlers");
+
+const { getAccessToken } = require("./handlers/spotifyToken");
 
 const PORT = 4000;
 express()
@@ -30,7 +25,6 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   .get("/accessToken", getAccessToken)
-  .get("/playlist", getPlaylist)
   .get("/KPOP", getKpop)
   .get("/KPOPAll", getAllKpop)
 

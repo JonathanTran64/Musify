@@ -1,46 +1,23 @@
-const { MongoClient } = require("mongodb");
 const fetch = require("node-fetch");
-const { v4: uuidv4 } = require("uuid");
-const request = require("request");
-require("dotenv").config();
-const { client_secret, MONGO_URI } = process.env;
+const { getAccessToken } = require("../handlers/spotifyToken");
 
-console.log(MONGO_URI);
+const kpopArrayIds = [
+  "3Ir5YWemOTGRRfXgROrsDV",
+  "0jB4ANR4ox65etDMnxvGLp",
+  "2EoheVFjqIxgJMb8VnDRtZ",
+  "37i9dQZF1DX9tPFwDMOaN1",
+  "6tQDMnj0qImEl6AKA1Uv74",
+];
 
-const getAccessToken = async (req, res) => {
-  const client_id = "40a54b6f450144acb4b972107fe0e1b9";
-  const authOptions = {
-    url: "https://accounts.spotify.com/api/token",
-    headers: {
-      Authorization:
-        "Basic " +
-        Buffer.from(client_id + ":" + client_secret).toString("base64"),
-    },
-    form: {
-      grant_type: "client_credentials",
-    },
-    json: true,
-  };
-
-  request.post(authOptions, async function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.json(body);
-    } else {
-      res.status(response.statusCode).json({ error: error || body.error });
-    }
-  });
+const getRandomKpopPlaylistId = () => {
+  const randomIndex = Math.floor(Math.random() * kpopArrayIds.length);
+  return kpopArrayIds[randomIndex];
 };
 
-const getPlaylist = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
-
+const getKpop = async (req, res) => {
   try {
-    await client.connect();
-    const db = client.db("Categories");
-
-    const playlistID = "";
-    const accessToken =
-      "BQAQa8SFKJXPJBybDha90uVzGXVbgflHRGWhlH7G0jtlsRbcZ-XWQmpofRo9iQXOy6B_3sxSTSSHCanH6jOwmbyVnw5mfA0nsSmPFs2zl7sF1p8CLb8";
+    const accessToken = await getAccessToken();
+    const playlistID = getRandomKpopPlaylistId();
 
     const response = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
@@ -55,93 +32,82 @@ const getPlaylist = async (req, res) => {
     const data = await response.json();
     const { items } = data;
 
-    let count = 97;
+    const song1 = items[Math.floor(Math.random() * items.length)];
+    const song2 = items[Math.floor(Math.random() * items.length)];
+    const song3 = items[Math.floor(Math.random() * items.length)];
 
-    for (const obj of items) {
-      const artistName = obj.track.artists[0].name;
-      const songName = obj.track.name;
-      const preview = obj.track.preview_url;
-      const albumCover = obj.track.album.images[2].url;
-      const spotifyLink = obj.track.external_urls.spotify;
-
-      if (preview === null) {
-        continue;
-      }
-
-      const info = {
-        _id: count + 1,
-        artistName: artistName,
-        songName: songName,
-        preview: preview,
-        albumCover: albumCover,
-        spotifyLink: spotifyLink,
-      };
-
-      await db.collection("Kpop").insertOne(info);
-      count++;
+    let chosenSong;
+    if (song1.track.preview_url !== null) {
+      chosenSong = song1;
+    } else if (song2.track.preview_url !== null) {
+      chosenSong = song2;
+    } else if (song3.track.preview_url !== null) {
+      chosenSong = song3;
     }
+
+    const artistName = chosenSong.track.artists[0].name;
+    const songName = chosenSong.track.name;
+    const preview = chosenSong.track.preview_url;
+    const albumCover = chosenSong.track.album.images[2].url;
+    const spotifyLink = chosenSong.track.external_urls.spotify;
+
+    const info = {
+      artistName: artistName,
+      songName: songName,
+      preview: preview,
+      albumCover: albumCover,
+      spotifyLink: spotifyLink,
+    };
 
     res.status(200).json({
       status: 200,
-      items,
+      song: info,
     });
   } catch (error) {
     console.log(error);
-  } finally {
-    await client.close();
-  }
-};
-
-const getKpop = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
-  try {
-    await client.connect();
-    const db = client.db("Categories");
-
-    const song = await db
-      .collection("Kpop")
-      .findOne({ _id: Math.floor(Math.random() * 150) });
-
-    if (song) {
-      res.status(200).json({
-        status: 200,
-        song,
-      });
-    } else {
-      res.status(404).json();
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    await client.close();
   }
 };
 
 const getAllKpop = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
   try {
-    await client.connect();
-    const db = client.db("Categories");
+    const accessToken = await getAccessToken();
+    const playlistID = getRandomKpopPlaylistId();
 
-    const song = await db.collection("Kpop").find().toArray();
+    console.log(playlistID);
 
-    const songArray = song.map((obj) => {
-      return `${obj.artistName} - ${obj.songName}`;
-    });
+    const response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
-    if (song) {
+    const data = await response.json();
+    const { items } = data;
+
+    let songsArray = [];
+    for (const object of items) {
+      const artistName = object.track.artists[0].name;
+      const songName = object.track.name;
+      songsArray.push(`${artistName} - ${songName}`);
+    }
+
+    if (songsArray) {
       res.status(200).json({
         status: 200,
-        songArray,
+        songsArray,
       });
-    } else {
-      res.status(404).json();
     }
   } catch (error) {
     console.log(error);
-  } finally {
-    await client.close();
+    res.status(404).json({
+      status: 404,
+      error: "Could not find songs array",
+    });
   }
 };
 
-module.exports = { getAccessToken, getPlaylist, getKpop, getAllKpop };
+module.exports = { getKpop, getAllKpop };

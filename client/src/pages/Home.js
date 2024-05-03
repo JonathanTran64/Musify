@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Genre from "./Genre";
+import Genre from "../components/Genre";
 
 import kpopImage from "../assets/kpop.jpg";
 

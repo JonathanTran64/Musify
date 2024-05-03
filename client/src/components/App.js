@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SongGame from "./SongGame";
-import Home from "./Home";
+import SongGame from "../pages/SongGame";
+import Home from "../pages/Home";
 import GlobalStyles from "../GlobalStyles";
-import Answer from "./Answer";
+import Answer from "../pages/Answer";
 
 const App = () => {
   return (

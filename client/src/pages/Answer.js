@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 const Answer = () => {
+  // fetch genre collection matching name
   const params = useParams();
   console.log(params);
 

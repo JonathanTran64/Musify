@@ -15,22 +15,25 @@ const Genre = ({ genre, image }) => {
 export default Genre;
 
 const Container = styled.div`
-  width: 400px;
+  width: 300px;
+
   h2 {
-    position: absolute;
-    left: 115px;
-    top: 65px;
-    width: 50px;
+    position: relative;
+    top: 100px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
   }
 
   img {
     width: 300px;
-    height: 200px;
+    height: 170px;
+    border: 2px black solid;
+    border-radius: 20px;
     object-fit: cover;
   }
 
-  a,
-  a:visited {
-    color: white;
+  a {
+    text-decoration: none;
   }
 `;

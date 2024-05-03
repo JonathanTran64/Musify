@@ -14,6 +14,8 @@ import InputSkipSubmit from "../components/InputSkipSubmit";
 const SongGame = () => {
   // fetched song
   const [song, setSong] = useState();
+
+  const [message, setMessage] = useState("");
   // checking if audio is playing
   const [isPlaying, setIsPlaying] = useState(false);
   // number of seconds allowed to play
@@ -39,9 +41,10 @@ const SongGame = () => {
     const getSong = async () => {
       try {
         const response = await fetch(`/${genre}`);
-        const { song, songsArray } = await response.json();
+        const { song, songsArray, message } = await response.json();
         console.log(song);
         setSong(song);
+        setMessage(message);
         setAllSongs(songsArray);
         // Set Volume
         audioRef.current.volume = 0.15;
@@ -101,7 +104,6 @@ const SongGame = () => {
 
   return (
     <Container>
-      <NavBar></NavBar>
       <GuessBoxWrapper>
         {/* GUESS BOXES */}
         {tries.map((tryAnswer, index) => (
@@ -177,6 +179,7 @@ const SongGame = () => {
 };
 
 const Container = styled.div`
+  padding-top: 30px;
   overflow-x: hidden;
   background-color: #e9c46a;
   height: 100vh;

@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SongGame from "../pages/SongGame";
-import Home from "../pages/Home";
+import SongGame from "./SongGame";
+import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
-import Answer from "../pages/Answer";
+import Answer from "./Answer";
+import NavBar from "../components/NavBar";
 
 const App = () => {
   return (
     <Router>
       <GlobalStyles />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/genre/:genre" element={<SongGame />} />

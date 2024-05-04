@@ -3,7 +3,6 @@ import SongGame from "./SongGame";
 import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
 import Answer from "./Answer";
-import NavBar from "../components/NavBar";
 import SongProvider from "../context/SongContext";
 
 const App = () => {
@@ -11,7 +10,6 @@ const App = () => {
     <SongProvider>
       <Router>
         <GlobalStyles />
-        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/genre/:genre" element={<SongGame />} />

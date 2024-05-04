@@ -16,7 +16,6 @@ const Answer = () => {
 
   const { song, setSong, tries, setTries } = useContext(SongContext);
   const answer = `${song.artistName} - ${song.songName}`;
-  console.log(song.preview);
   const { genre } = useParams();
   const navigate = useNavigate();
 

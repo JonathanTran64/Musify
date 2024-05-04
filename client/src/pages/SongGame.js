@@ -9,6 +9,7 @@ import SongProgressBar from "../components/SongProgessBar";
 import InputSkipSubmit from "../components/InputSkipSubmit";
 import { SongContext } from "../context/SongContext";
 import PlayButton from "../components/PlayButton";
+import NavBar from "../components/NavBar";
 
 const SongGame = () => {
   // number of seconds allowed to play
@@ -40,7 +41,6 @@ const SongGame = () => {
           `https://musify-nctl.onrender.com/${genre}`
         );
         const { song, songsArray } = await response.json();
-        console.log(song);
         setSong(song);
         setAllSongs(songsArray);
         // Set Volume
@@ -62,8 +62,6 @@ const SongGame = () => {
     } else {
       setSuggestion(result);
     }
-
-    console.log(result);
   }, [inputGuess]);
 
   // AUTOMATIC PAUSE AT SPECIFIED SECONDS
@@ -88,74 +86,77 @@ const SongGame = () => {
   }, [seconds, song]);
 
   return (
-    <Container>
-      <GuessBoxWrapper>
-        {/* GUESS BOXES */}
-        {tries.map((tryAnswer, index) => (
-          <GuessBox
-            key={index}
-            active={count === index ? "active" : "not-active"}
-            answer={tryAnswer}
-          />
-        ))}
-      </GuessBoxWrapper>
-      {song ? (
-        <>
-          <audio ref={audioRef} src={song.preview} />
+    <>
+      <NavBar genre={genre} />
+      <Container>
+        <GuessBoxWrapper>
+          {/* GUESS BOXES */}
+          {tries.map((tryAnswer, index) => (
+            <GuessBox
+              key={index}
+              active={count === index ? "active" : "not-active"}
+              answer={tryAnswer}
+            />
+          ))}
+        </GuessBoxWrapper>
+        {song ? (
+          <>
+            <audio ref={audioRef} src={song.preview} />
 
-          {/* SUGGESTIONS */}
-          <ButtonSuggestionsWrapper>
-            <FlexSuggestions>
-              {suggestions
-                ? suggestions.slice(0, 10).map((song, i) => {
-                    return (
-                      <div key={song + i}>
-                        <div>
-                          <ButtonSuggestions
-                            onClick={() => {
-                              setInputGuess(song + " ");
-                            }}
-                          >
-                            {song}
-                          </ButtonSuggestions>
+            {/* SUGGESTIONS */}
+            <ButtonSuggestionsWrapper>
+              <FlexSuggestions>
+                {suggestions
+                  ? suggestions.slice(0, 10).map((song, i) => {
+                      return (
+                        <div key={song + i}>
+                          <div>
+                            <ButtonSuggestions
+                              onClick={() => {
+                                setInputGuess(song + " ");
+                              }}
+                            >
+                              {song}
+                            </ButtonSuggestions>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
-                : ""}
-            </FlexSuggestions>
-          </ButtonSuggestionsWrapper>
+                      );
+                    })
+                  : ""}
+              </FlexSuggestions>
+            </ButtonSuggestionsWrapper>
 
-          <SongProgressBar
-            isPlaying={isPlaying}
-            count={count}
-            seconds={"16s"}
-          />
+            <SongProgressBar
+              isPlaying={isPlaying}
+              count={count}
+              seconds={"16s"}
+            />
 
-          <PlayButton
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            seconds={"0:16"}
-            audioRef={audioRef}
-          />
+            <PlayButton
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              seconds={"0:16"}
+              audioRef={audioRef}
+            />
 
-          <InputSkipSubmit
-            song={song}
-            seconds={seconds}
-            setSeconds={setSeconds}
-            tries={tries}
-            setTries={setTries}
-            count={count}
-            genre={genre}
-            inputGuess={inputGuess}
-            setInputGuess={setInputGuess}
-            setCount={setCount}
-          />
-        </>
-      ) : (
-        <Loading>Loading player...</Loading>
-      )}
-    </Container>
+            <InputSkipSubmit
+              song={song}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              tries={tries}
+              setTries={setTries}
+              count={count}
+              genre={genre}
+              inputGuess={inputGuess}
+              setInputGuess={setInputGuess}
+              setCount={setCount}
+            />
+          </>
+        ) : (
+          <Loading>Loading player...</Loading>
+        )}
+      </Container>
+    </>
   );
 };
 

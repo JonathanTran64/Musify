@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import Genre from "../components/Genre";
+import NavBar from "../components/NavBar";
 
 import kpopImage from "../assets/kpop.jpg";
 import popImage from "../assets/pop.png";
@@ -8,6 +9,7 @@ import hiphopImage from "../assets/hip-hop.png";
 import countryImage from "../assets/country.png";
 import rnbImage from "../assets/rnb.jpg";
 import rockImage from "../assets/rock.png";
+import arrowDownImage from "../assets/arrowDown.png";
 
 const Home = () => {
   const genres = [
@@ -20,6 +22,12 @@ const Home = () => {
   ];
   return (
     <Wrapper>
+      <NavBar />
+      <WelcomeWrapper>
+        <h1>Welcome to MUSIFY!</h1>
+        <h3>Pick a genre to start playing</h3>
+        <img src={arrowDownImage} alt="arrowDown" />
+      </WelcomeWrapper>
       <Container>
         {genres.map((obj) => {
           return (
@@ -38,6 +46,19 @@ const Home = () => {
 const Wrapper = styled.div`
   background-color: var(--background);
   height: 100vh;
+`;
+
+const WelcomeWrapper = styled.div`
+  padding: 30px 0 10px 0;
+  text-align: center;
+  color: var(--suggestText);
+  h1 {
+    margin: 0;
+  }
+
+  img {
+    width: 20px;
+  }
 `;
 
 const Container = styled.div`

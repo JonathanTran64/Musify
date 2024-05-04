@@ -43,7 +43,7 @@ const SecondsPLayButtonWrapper = styled.div`
   margin: 10px auto;
 
   p {
-    color: white;
+    color: var(--seconds);
   }
 `;
 
@@ -55,7 +55,7 @@ const PlayButtonClick = styled.button`
   background-color: transparent;
   padding: 15px 17px;
   border-radius: 50px;
-  border: 2px white solid;
+  border: 2px var(--seconds) solid;
   cursor: pointer;
 `;
 

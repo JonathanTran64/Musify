@@ -189,6 +189,17 @@ body, button, input {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+:root{
+  --background:  #212529;
+  --guessBox: #343a40;
+  --skip: #adb5bd;
+  --submit: #a7c957;
+  --suggestText: #e9ecef;
+  --notSeconds: #6c757d;
+  --seconds: #f8f9fa;
+  --skipWidth: #495057;
+}
+
 `;
 
 export default GlobalStyles;

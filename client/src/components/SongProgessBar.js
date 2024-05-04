@@ -9,36 +9,48 @@ const SongProgressBar = ({ isPlaying, count, seconds, display }) => {
           {/* Line Seconds Limit */}
           <LineWrapper
             $borderColor={
-              count === 5 || display === "none" ? "#dee2e6" : "#6c757d"
+              count === 5 || display === "none"
+                ? "var(--seconds)"
+                : "var(--notSeconds)"
             }
           >
             <Line
               $width={"50px"}
-              $borderColor={count === 0 ? "#dee2e6" : "#6c757d"}
+              $borderColor={
+                count === 0 ? "var(--seconds)" : "var(--notSeconds)"
+              }
               $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"95px"}
-              $borderColor={count === 1 ? "#dee2e6" : "#6c757d"}
+              $borderColor={
+                count === 1 ? "var(--seconds)" : "var(--notSeconds)"
+              }
               $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"185px"}
-              $borderColor={count === 2 ? "#dee2e6" : "#6c757d"}
+              $borderColor={
+                count === 2 ? "var(--seconds)" : "var(--notSeconds)"
+              }
               $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"315px"}
-              $borderColor={count === 3 ? "#dee2e6" : "#6c757d"}
+              $borderColor={
+                count === 3 ? "var(--seconds)" : "var(--notSeconds)"
+              }
               $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"487px"}
-              $borderColor={count === 4 ? "#dee2e6" : "#6c757d"}
+              $borderColor={
+                count === 4 ? "var(--seconds)" : "var(--notSeconds)"
+              }
               $display={display === "none" ? "none" : "block"}
             ></Line>
           </LineWrapper>
-          {/* RED BAR ANIMATION */}
+          {/* BAR ANIMATION */}
           <Player $isPlaying={isPlaying} $seconds={seconds}></Player>
           {/* Grey background when skipped */}
           <SkipWrapper>
@@ -78,13 +90,13 @@ const Skipped = styled.div`
   position: absolute;
   width: ${(props) => props.$width};
   height: 15px;
-  background-color: #495057;
+  background-color: var(--skipWidth);
 `;
 
 const ProgressBarWrapper = styled.div`
   display: flex;
   justify-content: center;
-  border: 1px #f8f9fa solid;
+  border: 1px var(--seconds) solid;
   width: 100%;
   height: 15px;
 `;
@@ -99,7 +111,7 @@ const ProgressBar = styled.div`
 const Player = styled.div`
   position: relative;
   bottom: 15px;
-  background-color: #adc178;
+  background-color: var(--submit);
   width: 5px;
   height: 100%;
   animation: ${({ $isPlaying }) => ($isPlaying ? "slide" : "none")}

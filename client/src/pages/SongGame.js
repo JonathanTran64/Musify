@@ -112,7 +112,8 @@ const SongGame = () => {
                           <ButtonSuggestions
                             onClick={() => {
                               setInputGuess(song + " ");
-                            }}>
+                            }}
+                          >
                             {song}
                           </ButtonSuggestions>
                         </div>
@@ -159,7 +160,7 @@ const SongGame = () => {
 const Container = styled.div`
   padding-top: 30px;
   overflow-x: hidden;
-  background-color: #212529;
+  background-color: var(--background);
   height: 100vh;
 `;
 
@@ -197,12 +198,12 @@ const ButtonSuggestions = styled.button`
   height: 33px;
   border: 1px #6c757d solid;
   border-bottom: 0px;
-  background-color: #212529;
-  color: #e9ecef;
+  background-color: var(--background);
+  color: var(--suggestText);
   cursor: pointer;
 
   &:hover {
-    background-color: #6c757d;
+    background-color: var(--notSeconds);
   }
 `;
 

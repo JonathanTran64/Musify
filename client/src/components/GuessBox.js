@@ -4,13 +4,15 @@ import xIcon from "../assets/xIcon.png";
 const GuessBox = ({ active, answer }) => {
   return (
     <Container
-      $color={answer !== "S K I P P E D" ? "#e9ecef" : "#6c757d"}
+      $color={
+        answer !== "S K I P P E D" ? "var(--suggestText)" : "var(--notSeconds)"
+      }
       $borderColor={
         active === "active"
-          ? "#f8f9fa"
+          ? "var(--seconds)"
           : answer !== "S K I P P E D" && answer
-          ? "red"
-          : "#6c757d"
+          ? "#bc4749"
+          : "var(--notSeconds)"
       }
     >
       <FlexBox>
@@ -30,7 +32,7 @@ const Container = styled.div`
   margin-bottom: 7px;
   border: 1px ${(props) => props.$borderColor} solid;
   height: 35px;
-  background-color: #343a40;
+  background-color: var(--guessBox);
 
   p {
     margin: 0;
@@ -54,7 +56,7 @@ const EmptyBox = styled.div`
   height: 20px;
   margin: 0 10px 0 3px;
   border-radius: 4px;
-  border: 2px #6c757d solid;
+  border: 2px var(--notSeconds) solid;
 `;
 
 export default GuessBox;

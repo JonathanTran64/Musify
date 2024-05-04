@@ -28,7 +28,7 @@ const Container = styled.div`
   img {
     width: 300px;
     height: 190px;
-    border: 1px black solid;
+    border: 1px var(--guessBox) solid;
     border-radius: 10px;
     object-fit: cover;
   }

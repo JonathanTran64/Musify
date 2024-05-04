@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import spotifyIcon from "../assets/spotify.png";
 import rightArrowIcon from "../assets/rightArrow.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import SongProgressBar from "../components/SongProgessBar";
 import PlayButton from "../components/PlayButton";
@@ -59,11 +59,12 @@ const Answer = () => {
                     string === "S K I P P E D"
                       ? "gray"
                       : string === answer
-                      ? "green"
+                      ? "#70e000"
                       : string === ""
                       ? "white"
-                      : "red"
-                  }></Tries>
+                      : "#bc4749"
+                  }
+                ></Tries>
               );
             })}
           </FlexTries>
@@ -87,7 +88,7 @@ const Answer = () => {
 };
 
 const Container = styled.div`
-  background-color: #212529;
+  background-color: var(--background);
   height: 100vh;
 `;
 
@@ -118,7 +119,7 @@ const SongInfoWrapper = styled.div`
 const SongInfo = styled.div`
   display: flex;
   align-items: center;
-  background-color: #adb5bd;
+  background-color: var(--skip);
   border-radius: 3px;
   padding: 10px;
 `;
@@ -176,9 +177,9 @@ const Tries = styled.div`
 const NewGame = styled.button`
   border: none;
   border-radius: 3px;
-  background-color: #adc178;
+  background-color: var(--submit);
   cursor: pointer;
-  color: #212529;
+  color: var(--background);
   font-weight: bold;
   transition: opacity 0.1s;
   width: 140px;

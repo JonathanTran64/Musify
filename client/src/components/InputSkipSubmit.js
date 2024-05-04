@@ -125,12 +125,12 @@ const InputGuess = styled.input`
   width: 655px;
   height: 40px;
   padding: 7px 0px 7px 40px;
-  background-color: #212529;
-  border: 1px #6c757d solid;
-  color: #f8f9fa;
+  background-color: var(--background);
+  border: 1px var(--notSeconds) solid;
+  color: var(--seconds);
 
   &::placeholder {
-    color: #adb5bd;
+    color: var(--skip);
   }
 `;
 
@@ -144,9 +144,9 @@ const WrapperSkipSubmit = styled.div`
 const SkipButton = styled.button`
   border: none;
   border-radius: 3px;
-  background-color: #adb5bd;
+  background-color: var(--skip);
   cursor: pointer;
-  color: #212529;
+  color: var(--background);
   font-weight: bold;
   transition: opacity 0.1s;
 
@@ -162,6 +162,6 @@ const SkipButtonLink = styled(SkipButton)`
 
 const SubmitButton = styled(SkipButton)`
   width: 100px;
-  background-color: #adc178;
+  background-color: var(--submit);
 `;
 export default InputSkipSubmit;

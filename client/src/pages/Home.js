@@ -36,9 +36,8 @@ const Home = () => {
 };
 
 const Wrapper = styled.div`
-  background-color: #212529;
+  background-color: var(--background);
   height: 100vh;
-  overflow: hidden;
 `;
 
 const Container = styled.div`

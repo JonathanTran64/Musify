@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import xIcon from "../assets/xIcon.png";
-import skipIcon from "../assets/skipIcon.png";
 
 const GuessBox = ({ active, answer }) => {
   return (

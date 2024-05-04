@@ -21,7 +21,7 @@ const InputSkipSubmit = ({
 
   // PRESS SKIP BUTTON
   const handleSkip = () => {
-    if (count < 5) {
+    if (count <= 5) {
       const newTries = [...tries];
       newTries[count] = "S K I P P E D";
       setTries(newTries);
@@ -48,7 +48,10 @@ const InputSkipSubmit = ({
       setSeconds(seconds + count);
       setInputGuess("");
     } else {
-      navigate(`/song/${genre}/${song.songName}`);
+      const newTries = [...tries];
+      newTries[count] = inputGuess.trim();
+      setTries(newTries);
+      navigate(`/answer/${genre}`);
     }
   };
 
@@ -89,8 +92,8 @@ const InputSkipSubmit = ({
               S K I P ( + {count + 1} s )
             </SkipButton>
           ) : (
-            <Link to={`/song/${genre}/${song.songName}`}>
-              <SkipButtonLink>S K I P</SkipButtonLink>
+            <Link to={`/answer/${genre}`}>
+              <SkipButtonLink onClick={handleSkip}>S K I P</SkipButtonLink>
             </Link>
           )}
           {/* SUBMIT BUTTON */}

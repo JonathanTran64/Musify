@@ -1,36 +1,45 @@
 import styled from "styled-components";
 
-const SongProgressBar = ({ isPlaying, count }) => {
+const SongProgressBar = ({ isPlaying, count, seconds, display }) => {
   return (
     <>
       {/* AUDIO BAR */}
       <ProgressBarWrapper>
         <ProgressBar>
           {/* Line Seconds Limit */}
-          <LineWrapper $borderColor={count === 5 ? "#dee2e6" : "#6c757d"}>
+          <LineWrapper
+            $borderColor={
+              count === 5 || display === "none" ? "#dee2e6" : "#6c757d"
+            }
+          >
             <Line
               $width={"50px"}
               $borderColor={count === 0 ? "#dee2e6" : "#6c757d"}
+              $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"95px"}
               $borderColor={count === 1 ? "#dee2e6" : "#6c757d"}
+              $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"185px"}
               $borderColor={count === 2 ? "#dee2e6" : "#6c757d"}
+              $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"315px"}
               $borderColor={count === 3 ? "#dee2e6" : "#6c757d"}
+              $display={display === "none" ? "none" : "block"}
             ></Line>
             <Line
               $width={"487px"}
               $borderColor={count === 4 ? "#dee2e6" : "#6c757d"}
+              $display={display === "none" ? "none" : "block"}
             ></Line>
           </LineWrapper>
           {/* RED BAR ANIMATION */}
-          <Player $isPlaying={isPlaying}></Player>
+          <Player $isPlaying={isPlaying} $seconds={seconds}></Player>
           {/* Grey background when skipped */}
           <SkipWrapper>
             <Skipped
@@ -93,7 +102,8 @@ const Player = styled.div`
   background-color: #adc178;
   width: 5px;
   height: 100%;
-  animation: ${({ $isPlaying }) => ($isPlaying ? "slide" : "none")} 16s linear;
+  animation: ${({ $isPlaying }) => ($isPlaying ? "slide" : "none")}
+    ${(props) => props.$seconds} linear;
   z-index: 1;
   @keyframes slide {
     from {
@@ -113,6 +123,7 @@ const LineWrapper = styled.div`
 `;
 
 const Line = styled.div`
+  display: ${(props) => props.$display};
   position: absolute;
   height: 100%;
   width: ${(props) => props.$width};

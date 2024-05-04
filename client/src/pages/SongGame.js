@@ -1,22 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FuzzySearch from "fuzzy-search";
-// images
-import playButtonWhiteImage from "../assets/playbuttonwhite.png";
-import stopButtonWhiteImage from "../assets/stopbuttonwhite.png";
+
 // components
 import GuessBox from "../components/GuessBox";
 import SongProgressBar from "../components/SongProgessBar";
 import InputSkipSubmit from "../components/InputSkipSubmit";
+import { SongContext } from "../context/SongContext";
+import PlayButton from "../components/PlayButton";
 
 const SongGame = () => {
-  // fetched song
-  const [song, setSong] = useState();
-
-  const [message, setMessage] = useState("");
-  // checking if audio is playing
-  const [isPlaying, setIsPlaying] = useState(false);
   // number of seconds allowed to play
   const [seconds, setSeconds] = useState(1);
   // fetch all the songs from the given genre
@@ -25,8 +19,9 @@ const SongGame = () => {
   const [inputGuess, setInputGuess] = useState("");
   // array of songs that matches the users input
   const [suggestions, setSuggestion] = useState([]);
-  // each try will have their answer match their index
-  const [tries, setTries] = useState(["", "", "", "", "", ""]);
+  // checking if audio is playing
+  const [isPlaying, setIsPlaying] = useState(false);
+
   // count number of tries
   let [count, setCount] = useState(0);
 
@@ -35,15 +30,16 @@ const SongGame = () => {
   // audio player ref
   const audioRef = useRef(null);
 
+  const { song, setSong, tries, setTries } = useContext(SongContext);
+
   // fetch the random song/songs from the chosen genre
   useEffect(() => {
     const getSong = async () => {
       try {
         const response = await fetch(`/${genre}`);
-        const { song, songsArray, message } = await response.json();
+        const { song, songsArray } = await response.json();
         console.log(song);
         setSong(song);
-        setMessage(message);
         setAllSongs(songsArray);
         // Set Volume
         audioRef.current.volume = 0.15;
@@ -89,18 +85,6 @@ const SongGame = () => {
     };
   }, [seconds, song]);
 
-  // PRESS PLAY BUTTON OR STOP
-  const handlePlay = () => {
-    audioRef.current.currentTime = 0;
-    if (!isPlaying) {
-      audioRef.current.play();
-      setIsPlaying(true);
-    } else {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
-
   return (
     <Container>
       <GuessBoxWrapper>
@@ -140,22 +124,18 @@ const SongGame = () => {
             </FlexSuggestions>
           </ButtonSuggestionsWrapper>
 
-          <SongProgressBar isPlaying={isPlaying} count={count} />
+          <SongProgressBar
+            isPlaying={isPlaying}
+            count={count}
+            seconds={"16s"}
+          />
 
-          <SecondsPLayButtonWrapper>
-            <p>0:00</p>
-            {/* PLAY BUTTON */}
-            <PlayButtonWrapper>
-              <PlayButton onClick={handlePlay}>
-                <PlayButtonImage
-                  src={isPlaying ? stopButtonWhiteImage : playButtonWhiteImage}
-                  alt="playButton"
-                  $left={isPlaying ? "0px" : "3px"}
-                />
-              </PlayButton>
-            </PlayButtonWrapper>
-            <p>0:16</p>
-          </SecondsPLayButtonWrapper>
+          <PlayButton
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            seconds={"0:16"}
+            audioRef={audioRef}
+          />
 
           <InputSkipSubmit
             song={song}
@@ -188,36 +168,6 @@ const GuessBoxWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 200px;
   width: 700px;
-`;
-
-const SecondsPLayButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 700px;
-  margin: 10px auto;
-
-  p {
-    color: white;
-  }
-`;
-
-const PlayButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const PlayButton = styled.button`
-  background-color: transparent;
-  padding: 15px 17px;
-  border-radius: 50px;
-  border: 2px white solid;
-  cursor: pointer;
-`;
-
-const PlayButtonImage = styled.img`
-  position: relative;
-  left: ${(props) => props.$left};
-  top: 1px;
 `;
 
 //Suggestions styling

@@ -4,19 +4,22 @@ import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
 import Answer from "./Answer";
 import NavBar from "../components/NavBar";
+import SongProvider from "../context/SongContext";
 
 const App = () => {
   return (
-    <Router>
-      <GlobalStyles />
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/genre/:genre" element={<SongGame />} />
-        <Route path="/song/:genre/:songName" element={<Answer />} />
-        <Route path="*" element={<h1>404 page not found</h1>} />
-      </Routes>
-    </Router>
+    <SongProvider>
+      <Router>
+        <GlobalStyles />
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/genre/:genre" element={<SongGame />} />
+          <Route path="/answer/:genre/" element={<Answer />} />
+          <Route path="*" element={<h1>404 page not found</h1>} />
+        </Routes>
+      </Router>
+    </SongProvider>
   );
 };
 

@@ -63,8 +63,7 @@ const Answer = () => {
                       : string === ""
                       ? "white"
                       : "red"
-                  }
-                ></Tries>
+                  }></Tries>
               );
             })}
           </FlexTries>
@@ -100,6 +99,10 @@ const Wrapper = styled.div`
   height: 400px;
   margin: 0 auto;
   margin-bottom: 170px;
+
+  @media (max-width: 1600px) {
+    height: 350px;
+  }
 `;
 
 const SongInfoWrapper = styled.div`

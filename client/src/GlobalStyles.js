@@ -10,6 +10,10 @@ html {
 body {
   margin: 0;
   overflow: hidden;
+
+  @media (max-width: 1024px) {
+    overflow-y: visible;
+  }
 }
 
 main {

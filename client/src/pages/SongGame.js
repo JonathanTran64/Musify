@@ -36,7 +36,9 @@ const SongGame = () => {
   useEffect(() => {
     const getSong = async () => {
       try {
-        const response = await fetch(`/${genre}`);
+        const response = await fetch(
+          `https://musify-nctl.onrender.com/${genre}`
+        );
         const { song, songsArray } = await response.json();
         console.log(song);
         setSong(song);

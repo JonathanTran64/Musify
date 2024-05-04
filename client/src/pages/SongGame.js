@@ -112,8 +112,7 @@ const SongGame = () => {
                           <ButtonSuggestions
                             onClick={() => {
                               setInputGuess(song + " ");
-                            }}
-                          >
+                            }}>
                             {song}
                           </ButtonSuggestions>
                         </div>
@@ -168,6 +167,10 @@ const GuessBoxWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 200px;
   width: 700px;
+
+  @media (max-width: 1600px) {
+    margin-bottom: 100px;
+  }
 `;
 
 //Suggestions styling

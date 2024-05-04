@@ -2,6 +2,7 @@
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const {
   getKpop,
   getPop,
@@ -25,6 +26,7 @@ express()
     next();
   })
   .use(morgan("tiny"))
+  .use(cors())
   .use(express.json())
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))

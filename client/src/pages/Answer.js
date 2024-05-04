@@ -8,22 +8,32 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import SongProgressBar from "../components/SongProgessBar";
 import PlayButton from "../components/PlayButton";
+import NavBar from "../components/NavBar";
 
 const Answer = () => {
-  // audio player ref
-  const audioAnswerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
+  const [win, setWin] = useState(false);
   const { song, setSong, tries, setTries } = useContext(SongContext);
-  const answer = `${song.artistName} - ${song.songName}`;
+
   const { genre } = useParams();
   const navigate = useNavigate();
+  // audio player ref
+  const audioAnswerRef = useRef(null);
+  const answer = `${song.artistName} - ${song.songName}`;
 
   const handleNewGame = () => {
     setTries(["", "", "", "", "", ""]);
     setSong("");
     navigate(`/genre/${genre}`);
   };
+
+  useEffect(() => {
+    tries.forEach((string) => {
+      if (string === answer) {
+        setWin(true);
+      }
+    });
+  }, [tries]);
 
   useEffect(() => {
     audioAnswerRef.current.volume = 0.15;
@@ -33,6 +43,7 @@ const Answer = () => {
 
   return (
     <Container>
+      <NavBar genre={genre} />
       <Wrapper>
         <SongInfoWrapper>
           <a href={song.spotifyLink} target="blank">
@@ -49,11 +60,26 @@ const Answer = () => {
         </SongInfoWrapper>
 
         <TriesWrapper>
-          <p>Good Job!</p>
+          <Message>
+            {tries[0] === answer
+              ? "LEGEND!"
+              : tries[1] === answer
+              ? "Amazing!"
+              : tries[2] === answer
+              ? "Nice Work!"
+              : tries[3] === answer
+              ? "Good Job!"
+              : tries[4] === answer
+              ? "Bravo!"
+              : tries[5] === answer
+              ? "That was close!"
+              : ":("}
+          </Message>
           <FlexTries>
-            {tries.map((string) => {
+            {tries.map((string, i) => {
               return (
                 <Tries
+                  key={string + i}
                   $backColor={
                     string === "S K I P P E D"
                       ? "gray"
@@ -67,7 +93,13 @@ const Answer = () => {
               );
             })}
           </FlexTries>
-          <p>You Got It!</p>
+          {win ? (
+            <PlayAgain>You Got It! Press 'NEW GAME' to play again.</PlayAgain>
+          ) : (
+            <PlayAgain>
+              You didn't guess the track! Press 'NEW GAME' to play again.
+            </PlayAgain>
+          )}
           <NewGame onClick={handleNewGame}>
             <p>N E W</p>
             <p>G A M E</p>
@@ -154,16 +186,21 @@ const RightArrow = styled.img`
 
 const TriesWrapper = styled.div`
   margin: 0 auto;
-  width: 200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
+const Message = styled.p`
+  color: var(--seconds);
+  font-weight: 600;
+`;
+
 const FlexTries = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 200px;
 `;
 
 const Tries = styled.div`
@@ -171,6 +208,10 @@ const Tries = styled.div`
   height: 5px;
   background-color: ${(props) => props.$backColor};
   margin-right: 5px;
+`;
+
+const PlayAgain = styled.p`
+  color: var(--seconds);
 `;
 
 const NewGame = styled.button`

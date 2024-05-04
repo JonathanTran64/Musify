@@ -122,7 +122,7 @@ const SearchIcon = styled.img`
   left: 10px;
 `;
 const InputGuess = styled.input`
-  width: 655px;
+  width: 658px;
   height: 40px;
   padding: 7px 0px 7px 40px;
   background-color: var(--background);

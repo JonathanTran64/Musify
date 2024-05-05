@@ -23,6 +23,7 @@ const SongGame = () => {
   // checking if audio is playing
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const [firstLoad, setFirstLoad] = useState(false);
   // count number of tries
   let [count, setCount] = useState(0);
 
@@ -43,6 +44,7 @@ const SongGame = () => {
         const { song, songsArray } = await response.json();
         setSong(song);
         setAllSongs(songsArray);
+        setFirstLoad(false);
         // Set Volume
         audioRef.current.volume = 0.15;
       } catch (error) {
@@ -51,6 +53,15 @@ const SongGame = () => {
     };
 
     getSong();
+  }, []);
+
+  // First time loading
+  useEffect(() => {
+    if (!song) {
+      setTimeout(() => {
+        setFirstLoad(true);
+      }, 10000);
+    }
   }, []);
 
   // Fuzzy search and set suggestions to an array that matches the users input
@@ -102,7 +113,6 @@ const SongGame = () => {
         {song ? (
           <>
             <audio ref={audioRef} src={song.preview} />
-
             {/* SUGGESTIONS */}
             <ButtonSuggestionsWrapper>
               <FlexSuggestions>
@@ -125,20 +135,17 @@ const SongGame = () => {
                   : ""}
               </FlexSuggestions>
             </ButtonSuggestionsWrapper>
-
             <SongProgressBar
               isPlaying={isPlaying}
               count={count}
               seconds={"16s"}
             />
-
             <PlayButton
               isPlaying={isPlaying}
               setIsPlaying={setIsPlaying}
               seconds={"0:16"}
               audioRef={audioRef}
             />
-
             <InputSkipSubmit
               song={song}
               seconds={seconds}
@@ -153,7 +160,13 @@ const SongGame = () => {
             />
           </>
         ) : (
-          <Loading>Loading player...</Loading>
+          <>
+            <FirstLoad $display={firstLoad ? "block" : "none"}>
+              If this is your first time loading please wait around a minute
+              while we fetch the tracks. Thank you and enjoy MUSIFY!
+            </FirstLoad>
+            <Loading>Loading player...</Loading>
+          </>
         )}
       </Container>
     </>
@@ -214,5 +227,13 @@ const Loading = styled.h3`
   margin: 0 auto;
   width: 200px;
   color: white;
+`;
+
+const FirstLoad = styled.h3`
+  margin: 0 auto;
+  width: 1100px;
+  color: var(--submit);
+  margin-bottom: 20px;
+  display: ${(props) => props.$display};
 `;
 export default SongGame;

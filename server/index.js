@@ -3,6 +3,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
 const {
   getKpop,
   getPop,
@@ -11,6 +13,13 @@ const {
   getRnB,
   getRock,
 } = require("./handlers/handlers");
+
+const {
+  test,
+  registerUser,
+  loginUser,
+  getProfile,
+} = require("./handlers/authHandler");
 
 const PORT = process.env.PORT || 4000;
 express()
@@ -26,8 +35,14 @@ express()
     next();
   })
   .use(morgan("tiny"))
-  .use(cors())
+  .use(
+    cors({
+      credentials: true,
+      origin: `http://localhost:3000`,
+    })
+  )
   .use(express.json())
+  .use(cookieParser())
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
@@ -37,5 +52,10 @@ express()
   .get("/country", getCountry)
   .get("/r&b", getRnB)
   .get("/rock", getRock)
+
+  .get("/login", test)
+  .post("/register", registerUser)
+  .post("/login", loginUser)
+  .get("/profile", getProfile)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

@@ -4,20 +4,35 @@ import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
 import Answer from "./Answer";
 import SongProvider from "../context/SongContext";
+import Register from "../components/Register";
+import axios from "axios";
+import Login from "../components/Login";
+import { Toaster } from "react-hot-toast";
+import UserProvider from "../context/UserContext";
+import Dashboard from "./Dashboard";
+
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
 
 const App = () => {
   return (
-    <SongProvider>
-      <Router>
-        <GlobalStyles />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/genre/:genre" element={<SongGame />} />
-          <Route path="/answer/:genre" element={<Answer />} />
-          <Route path="*" element={<h1>404 page not found</h1>} />
-        </Routes>
-      </Router>
-    </SongProvider>
+    <UserProvider>
+      <SongProvider>
+        <Router>
+          <GlobalStyles />
+          <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/genre/:genre" element={<SongGame />} />
+            <Route path="/answer/:genre" element={<Answer />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<h1>404 page not found</h1>} />
+          </Routes>
+        </Router>
+      </SongProvider>
+    </UserProvider>
   );
 };
 

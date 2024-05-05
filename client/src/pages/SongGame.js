@@ -60,7 +60,7 @@ const SongGame = () => {
     if (!song) {
       setTimeout(() => {
         setFirstLoad(true);
-      }, 10000);
+      }, 5000);
     }
   }, []);
 

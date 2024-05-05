@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 import UserProvider from "../context/UserContext";
 import Dashboard from "./Dashboard";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = "https://musify-lac.vercel.app/";
 axios.defaults.withCredentials = true;
 
 const App = () => {

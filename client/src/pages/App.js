@@ -4,7 +4,7 @@ import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
 import Answer from "./Answer";
 import SongProvider from "../context/SongContext";
-import Register from "../components/Register";
+
 import axios from "axios";
 import Login from "../components/Login";
 import { Toaster } from "react-hot-toast";
@@ -20,10 +20,9 @@ const App = () => {
       <SongProvider>
         <Router>
           <GlobalStyles />
-          <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/genre/:genre" element={<SongGame />} />
             <Route path="/answer/:genre" element={<Answer />} />

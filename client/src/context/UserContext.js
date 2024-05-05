@@ -5,6 +5,8 @@ export const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [darkDisplay, setDarkDisplay] = useState(false);
+  const [displayRL, setDisplayRL] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -14,7 +16,16 @@ const UserProvider = ({ children }) => {
     }
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        darkDisplay,
+        setDarkDisplay,
+        displayRL,
+        setDisplayRL,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

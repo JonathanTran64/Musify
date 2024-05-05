@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import Login from "./Login";
 
 //images
 import questionMarkIcon from "../assets/questionMark.png";
@@ -9,29 +10,45 @@ import noteIcon from "../assets/note.png";
 import soundIcon from "../assets/sound.png";
 import smileIcon from "../assets/smile.png";
 import xIconGrey from "../assets/xIconGrey.png";
+import { UserContext } from "../context/UserContext";
 
 const NavBar = ({ genre }) => {
-  const [display, setDisplay] = useState(false);
-  const handleClickDark = () => {
-    setDisplay(false);
-  };
+  const [display, setDisplayHTP] = useState(false);
+  const { darkDisplay, setDarkDisplay, displayRL, setDisplayRL } =
+    useContext(UserContext);
 
   return (
     <>
       <Dark
         id="yourDivId"
-        onClick={handleClickDark}
-        $display={display ? "block" : "none"}
+        onClick={() => {
+          setDarkDisplay(false);
+          setDisplayRL(false);
+          setDisplayHTP(false);
+        }}
+        $display={darkDisplay ? "block" : "none"}
       ></Dark>
       <Container>
         <FlexBox>
-          <HowToPlayButton onClick={() => setDisplay(true)}>
+          <HowToPlayButton
+            onClick={() => {
+              setDarkDisplay(true);
+              setDisplayHTP(true);
+            }}
+          >
             <img src={questionMarkIcon} alt="questionMark" />
           </HowToPlayButton>
           <Link to={"/"}>
             {genre ? <h1>MUSIFY - {genre}</h1> : <h1>MUSIFY</h1>}
           </Link>
-          <img src={profileIcon} alt="profileIcon" />
+          <ProfileButton
+            onClick={() => {
+              setDisplayRL(true);
+              setDarkDisplay(true);
+            }}
+          >
+            <img src={profileIcon} alt="profileIcon" />
+          </ProfileButton>
         </FlexBox>
       </Container>
 
@@ -46,7 +63,8 @@ const NavBar = ({ genre }) => {
               </Header>
               <button
                 onClick={() => {
-                  setDisplay(false);
+                  setDisplayHTP(false);
+                  setDarkDisplay(false);
                 }}
               >
                 <img src={xIconGrey} alt="xIconGrey"></img>
@@ -71,7 +89,8 @@ const NavBar = ({ genre }) => {
             </Rules>
             <CloseButton
               onClick={() => {
-                setDisplay(false);
+                setDisplayHTP(false);
+                setDarkDisplay(false);
               }}
             >
               P L A Y
@@ -79,6 +98,7 @@ const NavBar = ({ genre }) => {
           </HowToPlayFlex>
         </HowToPlay>
       </HowToPlayWrapper>
+      <Login />
     </>
   );
 };
@@ -128,6 +148,8 @@ const HowToPlayButton = styled.button`
   padding: 0;
   cursor: pointer;
 `;
+
+const ProfileButton = styled(HowToPlayButton)``;
 
 const HowToPlayWrapper = styled.div`
   width: 450px;

@@ -64,6 +64,7 @@ const getKpop = async (req, res) => {
     "2EoheVFjqIxgJMb8VnDRtZ",
     "37i9dQZF1DX9tPFwDMOaN1",
     "6tQDMnj0qImEl6AKA1Uv74",
+    "4JcbaaznRdlWyzkXrDC7C6",
   ];
 
   try {
@@ -93,6 +94,8 @@ const getPop = async (req, res) => {
     "1WH6WVBwPBz35ZbWsgCpgr",
     "37i9dQZF1DWXT8uSSn6PRy",
     "1Cgey68pUlQGsCPI2wJuxr",
+    "2xutOn4Ea4RyjuaRaD3jl3",
+    "2eVuLoCP74cegyax11zgEf",
   ];
 
   try {

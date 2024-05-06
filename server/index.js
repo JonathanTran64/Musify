@@ -35,12 +35,7 @@ express()
     next();
   })
   .use(morgan("tiny"))
-  .use(
-    cors({
-      credentials: true,
-      origin: "https://musify-nctl.onrender.com",
-    })
-  )
+  .use(cors())
   .use(express.json())
   .use(cookieParser())
   .use(express.urlencoded({ extended: false }))

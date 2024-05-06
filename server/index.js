@@ -36,7 +36,6 @@ express()
   .use(morgan("tiny"))
   .use(
     cors({
-      credentials: true,
       origin: "*",
     })
   )

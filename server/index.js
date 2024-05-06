@@ -15,7 +15,6 @@ const {
 } = require("./handlers/handlers");
 
 const {
-  test,
   registerUser,
   loginUser,
   getProfile,
@@ -38,7 +37,7 @@ express()
   .use(
     cors({
       credentials: true,
-      origin: "https://musify-lac.vercel.app",
+      origin: "*",
     })
   )
   .use(express.json())

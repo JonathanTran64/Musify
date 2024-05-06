@@ -32,6 +32,7 @@ express()
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
+    res.header("Access-Control-Allow-Origin", "https://musify-lac.vercel.app");
     next();
   })
   .use(morgan("tiny"))

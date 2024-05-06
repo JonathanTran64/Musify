@@ -38,7 +38,6 @@ express()
   .use(
     cors({
       credentials: true,
-      origin: `https://musify-lac.vercel.app/`,
     })
   )
   .use(express.json())
@@ -53,7 +52,6 @@ express()
   .get("/r&b", getRnB)
   .get("/rock", getRock)
 
-  .get("/login", test)
   .post("/register", registerUser)
   .post("/login", loginUser)
   .get("/profile", getProfile)

@@ -22,6 +22,12 @@ const {
 
 const PORT = process.env.PORT || 4000;
 express()
+  .use(
+    cors({
+      credentials: true,
+      origin: "https://musify-lac.vercel.app",
+    })
+  )
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
@@ -34,12 +40,7 @@ express()
     next();
   })
   .use(morgan("tiny"))
-  .use(
-    cors({
-      credentials: true,
-      origin: "https://musify-lac.vercel.app",
-    })
-  )
+
   .use(express.json())
   .use(cookieParser())
   .use(express.urlencoded({ extended: false }))

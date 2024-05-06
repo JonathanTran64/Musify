@@ -38,6 +38,7 @@ express()
   .use(
     cors({
       credentials: true,
+      origin: "https://musify-nctl.onrender.com",
     })
   )
   .use(express.json())

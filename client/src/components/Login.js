@@ -1,19 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
 import xIconGrey from "../assets/xIconGrey.png";
 
 const Login = () => {
+  // user's input
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+  // display login or register
   const [displayLogIn, setDisplayLogIn] = useState(false);
+
+  // context
   const {
     setDarkDisplay,
     displayRL,
@@ -23,6 +26,7 @@ const Login = () => {
     setFirstClick,
   } = useContext(UserContext);
 
+  // POST Login
   const handleLogin = async (e) => {
     e.preventDefault();
     const { email, password } = data;
@@ -40,6 +44,7 @@ const Login = () => {
     } catch (error) {}
   };
 
+  // POST Register
   const handleRegister = async (e) => {
     e.preventDefault();
     const { name, email, password } = data;
@@ -62,6 +67,7 @@ const Login = () => {
     }
   };
 
+  // Click Login ? Register : Login && animation bar
   const handleRegisterLoginHead = () => {
     if (firstClick) {
       setFirstClick(false);

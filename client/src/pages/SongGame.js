@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FuzzySearch from "fuzzy-search";
+import axios from "axios";
 
 // components
 import GuessBox from "../components/GuessBox";
@@ -38,11 +39,11 @@ const SongGame = () => {
   useEffect(() => {
     const getSong = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:4000/${genre}`
-          // https://musifybackend.onrender.com
+        const response = await axios.get(
+          `https://musifybackend.onrender.com/${genre}`
         );
-        const { song, songsArray } = await response.json();
+        // https://musifybackend.onrender.com
+        const { song, songsArray } = await response.data;
         setSong(song);
         setAllSongs(songsArray);
         setFirstLoad(false);

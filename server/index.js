@@ -32,16 +32,15 @@ express()
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
     );
-    const allowedOrigins = ["https://musify-lac.vercel.app"];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-      res.header("Access-Control-Allow-Origin", origin);
-    }
-    res.header("Access-Control-Allow-Credentials", true);
     next();
   })
   .use(morgan("tiny"))
-  .use(cors())
+  .use(
+    cors({
+      credentials: true,
+      origin: "https://musify-lac.vercel.app/",
+    })
+  )
   .use(express.json())
   .use(cookieParser())
   .use(express.urlencoded({ extended: false }))

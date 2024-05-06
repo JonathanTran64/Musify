@@ -97,25 +97,11 @@ const getProfile = async (req, res) => {
   const { token } = req.cookies;
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, {}, (err, user) => {
-      if (err) {
-        res.status(401).json({ error: "Unauthorized" });
-      } else {
-        const allowedOrigins = ["https://musify-lac.vercel.app"];
-        const origin = req.headers.origin;
-        if (allowedOrigins.includes(origin)) {
-          res.header("Access-Control-Allow-Origin", origin);
-        } else {
-          res.header(
-            "Access-Control-Allow-Origin",
-            "https://musify-lac.vercel.app"
-          );
-        }
-        res.header("Access-Control-Allow-Credentials", true); // Add this line
-        res.json(user);
-      }
+      if (err) throw err;
+      res.json(user);
     });
   } else {
-    res.status(401).json({ error: "Unauthorized" });
+    res.json(null);
   }
 };
 

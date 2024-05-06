@@ -36,7 +36,7 @@ express()
     next();
   })
   .use(morgan("tiny"))
-  .use(cors())
+  .use(cors({ credentials: true }))
   .use(express.json())
   .use(cookieParser())
   .use(express.urlencoded({ extended: false }))

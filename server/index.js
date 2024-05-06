@@ -38,7 +38,7 @@ express()
   .use(
     cors({
       credentials: true,
-      origin: "https://musify-lac.vercel.app",
+      origin: "http://musify-lac.vercel.app",
     })
   )
   .use(express.json())

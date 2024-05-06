@@ -6,10 +6,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
-const test = (req, res) => {
-  res.status(200).json("Login test success");
-};
-
 // Register Endpoint
 const registerUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI);
@@ -105,4 +101,4 @@ const getProfile = async (req, res) => {
   }
 };
 
-module.exports = { test, registerUser, loginUser, getProfile };
+module.exports = { registerUser, loginUser, getProfile };

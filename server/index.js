@@ -25,6 +25,8 @@ express()
   .use(
     cors({
       credentials: true,
+      origin: "https://musify-lac.vercel.app",
+      // origin: 'https://musify-lac.vercel.app/'
     })
   )
   .use(function (req, res, next) {

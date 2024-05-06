@@ -36,7 +36,8 @@ express()
   .use(morgan("tiny"))
   .use(
     cors({
-      origin: "*",
+      credentials: true,
+      origin: "https://musify-lac.vercel.app",
     })
   )
   .use(express.json())

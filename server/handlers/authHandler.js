@@ -100,11 +100,12 @@ const getProfile = async (req, res) => {
       if (err) {
         res.status(401).json({ error: "Unauthorized" });
       } else {
-        res.header(
-          "Access-Control-Allow-Origin",
-          "https://musify-lac.vercel.app"
-        );
-        res.header("Access-Control-Allow-Credentials", true);
+        const allowedOrigins = ["https://musify-lac.vercel.app"];
+        const origin = req.headers.origin;
+        if (allowedOrigins.includes(origin)) {
+          res.header("Access-Control-Allow-Origin", origin);
+        }
+        res.header("Access-Control-Allow-Credentials", true); // Add this line
         res.json(user);
       }
     });

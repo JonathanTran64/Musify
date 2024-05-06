@@ -101,7 +101,9 @@ const getProfile = async (req, res) => {
       res.json(user);
     });
   } else {
-    res.json(null);
+    res.header("Access-Control-Allow-Origin", "https://musify-lac.vercel.app");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.json(user);
   }
 };
 

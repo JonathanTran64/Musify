@@ -198,9 +198,9 @@ const MovingLine = styled.div`
   width: 70px;
   margin-bottom: 10px;
   background-color: var(--submit);
-  animation: slide 1s ease-in-out;
+  animation: slideLogin 1s ease-in-out;
 
-  @keyframes slide {
+  @keyframes slideLogin {
     from {
       left: 3px;
     }

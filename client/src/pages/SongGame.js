@@ -39,7 +39,7 @@ const SongGame = () => {
     const getSong = async () => {
       try {
         const response = await fetch(
-          `https://musify-nctl.onrender.com/${genre}`
+          `https://musifybackend.onrender.com/${genre}`
         );
         const { song, songsArray } = await response.json();
         setSong(song);

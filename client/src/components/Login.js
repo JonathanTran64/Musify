@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -14,8 +14,14 @@ const Login = () => {
   });
 
   const [displayLogIn, setDisplayLogIn] = useState(false);
-  const { setDarkDisplay, displayRL, setDisplayRL } = useContext(UserContext);
-  const navigate = useNavigate();
+  const {
+    setDarkDisplay,
+    displayRL,
+    setDisplayRL,
+    user,
+    firstClick,
+    setFirstClick,
+  } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,7 +35,7 @@ const Login = () => {
         setData({ ...data, password: "", email: "" });
         setDarkDisplay(false);
         setDisplayRL(false);
-        navigate("/");
+        window.location.reload();
       }
     } catch (error) {}
   };
@@ -56,8 +62,24 @@ const Login = () => {
     }
   };
 
+  const handleRegisterLoginHead = () => {
+    if (firstClick) {
+      setFirstClick(false);
+    }
+    if (displayLogIn) {
+      setDisplayLogIn(false);
+    } else {
+      setDisplayLogIn(true);
+    }
+
+    setData({ ...data, name: "", password: "", email: "" });
+  };
+
   return (
-    <Wrapper $display={displayRL ? "block" : "none"}>
+    <Wrapper
+      $display={displayRL ? "block" : "none"}
+      $slide={displayRL ? "slideRL" : "none"}
+    >
       <Container>
         <XButton
           onClick={() => {
@@ -67,25 +89,20 @@ const Login = () => {
           <img src={xIconGrey} alt="xIconGrey" />
         </XButton>
         <ButtonsFlex>
-          <RLButtons
-            onClick={() => {
-              setDisplayLogIn(false);
-              setData({ ...data, name: "", password: "", email: "" });
-            }}
-          >
-            Register
-          </RLButtons>
-          <RLButtons
-            onClick={() => {
-              setDisplayLogIn(true);
-              setData({ ...data, name: "", password: "", email: "" });
-            }}
-          >
-            Login
-          </RLButtons>
+          <RLButtons onClick={handleRegisterLoginHead}>Register</RLButtons>
+          <RLButtons onClick={handleRegisterLoginHead}>Login</RLButtons>
         </ButtonsFlex>
         <MovingLineContainer>
-          <MovingLine $left={displayLogIn ? "198px" : "3px"} />
+          <MovingLine
+            $slideLogin={
+              firstClick
+                ? "none"
+                : displayLogIn
+                ? "slideLogin"
+                : "slideRegister"
+            }
+            $left={displayLogIn ? "198px" : "3px"}
+          />
         </MovingLineContainer>
 
         {/* FORMS */}
@@ -161,6 +178,16 @@ const Wrapper = styled.div`
   top: 90px;
   background-color: var(--background);
   z-index: 999;
+  animation: ${(props) => props.$slide} 0.3s ease-in-out;
+
+  @keyframes slideRL {
+    from {
+      top: 120px;
+    }
+    to {
+      top: 90px;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -169,6 +196,7 @@ const Container = styled.div`
   height: 450px;
   background-color: var(--background);
   border: 1px var(--notSeconds) solid;
+  border-radius: 15px;
 `;
 
 const XButton = styled.button`
@@ -198,7 +226,7 @@ const MovingLine = styled.div`
   width: 70px;
   margin-bottom: 10px;
   background-color: var(--submit);
-  animation: slideLogin 1s ease-in-out;
+  animation: ${(props) => props.$slideLogin} 0.3s ease-in-out;
 
   @keyframes slideLogin {
     from {
@@ -206,7 +234,17 @@ const MovingLine = styled.div`
     }
 
     to {
-      left: 200px;
+      left: 198px;
+    }
+  }
+
+  @keyframes slideRegister {
+    from {
+      left: 198px;
+    }
+
+    to {
+      left: 3px;
     }
   }
 `;

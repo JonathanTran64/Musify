@@ -14,8 +14,22 @@ import { UserContext } from "../context/UserContext";
 
 const NavBar = ({ genre }) => {
   const [display, setDisplayHTP] = useState(false);
-  const { darkDisplay, setDarkDisplay, displayRL, setDisplayRL } =
-    useContext(UserContext);
+  const {
+    darkDisplay,
+    setDarkDisplay,
+    displayRL,
+    setDisplayRL,
+    user,
+    setUser,
+    setFirstClick,
+  } = useContext(UserContext);
+
+  const handleProfileClick = () => {
+    setFirstClick(true);
+    setDisplayRL(true);
+    setDarkDisplay(true);
+    console.log(user, "nav");
+  };
 
   return (
     <>
@@ -41,12 +55,7 @@ const NavBar = ({ genre }) => {
           <Link to={"/"}>
             {genre ? <h1>MUSIFY - {genre}</h1> : <h1>MUSIFY</h1>}
           </Link>
-          <ProfileButton
-            onClick={() => {
-              setDisplayRL(true);
-              setDarkDisplay(true);
-            }}
-          >
+          <ProfileButton onClick={handleProfileClick}>
             <img src={profileIcon} alt="profileIcon" />
           </ProfileButton>
         </FlexBox>

@@ -29,15 +29,33 @@ express()
       // origin: 'https://musify-lac.vercel.app/'
     })
   )
-  .use(function (req, res, next) {
-    res.header(
+  // .use(function (req, res, next) {
+  //   res.header(
+  //     "Access-Control-Allow-Methods",
+  //     "OPTIONS, HEAD, GET, PUT, POST, DELETE"
+  //   );
+  //   res.header(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept"
+  //   );
+  //   next();
+  // })
+
+  .use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader(
       "Access-Control-Allow-Methods",
-      "OPTIONS, HEAD, GET, PUT, POST, DELETE"
+      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
     );
-    res.header(
+    res.setHeader(
       "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
+      "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
     );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Private-Network", true);
+    //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+    res.setHeader("Access-Control-Max-Age", 7200);
+
     next();
   })
   .use(morgan("tiny"))

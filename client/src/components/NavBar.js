@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import Login from "./Login";
+import ProfileDropDown from "./ProfileDropDown";
 
 //images
 import questionMarkIcon from "../assets/questionMark.png";
@@ -22,12 +23,23 @@ const NavBar = ({ genre }) => {
     user,
     setUser,
     setFirstClick,
+    dropDownDisplay,
+    setDropDownDisplay,
   } = useContext(UserContext);
 
   const handleProfileClick = () => {
-    setFirstClick(true);
-    setDisplayRL(true);
-    setDarkDisplay(true);
+    if (!user) {
+      setFirstClick(true);
+      setDisplayRL(true);
+      setDarkDisplay(true);
+    }
+
+    if (user && dropDownDisplay) {
+      setDropDownDisplay(false);
+    } else if (user && !dropDownDisplay) {
+      setDropDownDisplay(true);
+    }
+
     console.log(user, "nav");
   };
 
@@ -60,6 +72,8 @@ const NavBar = ({ genre }) => {
           </ProfileButton>
         </FlexBox>
       </Container>
+
+      <ProfileDropDown />
 
       <HowToPlayWrapper>
         <HowToPlay $display={display ? "block" : "none"}>

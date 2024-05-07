@@ -9,7 +9,6 @@ import axios from "axios";
 import Login from "../components/Login";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "../context/UserContext";
-import Dashboard from "./Dashboard";
 
 axios.defaults.baseURL = "https://musifybackend.onrender.com";
 // https://musifybackend.onrender.com
@@ -27,7 +26,6 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/genre/:genre" element={<SongGame />} />
             <Route path="/answer/:genre" element={<Answer />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="*" element={<h1>404 page not found</h1>} />
           </Routes>
         </Router>

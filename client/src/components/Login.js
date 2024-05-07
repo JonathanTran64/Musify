@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 import { toast } from "react-hot-toast";
 import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
@@ -31,7 +31,7 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const { data } = await axios.post("/login", { email, password });
+      const { data } = await axios.post("/login", { email, password }, {});
       if (data.error) {
         toast.error(data.error);
       } else {
@@ -39,7 +39,10 @@ const Login = () => {
         setData({ ...data, password: "", email: "" });
         setDarkDisplay(false);
         setDisplayRL(false);
-        window.location.reload();
+
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
       }
     } catch (error) {}
   };

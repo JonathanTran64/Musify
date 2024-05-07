@@ -8,6 +8,7 @@ const UserProvider = ({ children }) => {
   const [darkDisplay, setDarkDisplay] = useState(false);
   const [displayRL, setDisplayRL] = useState(false);
   const [firstClick, setFirstClick] = useState(false);
+  const [dropDownDisplay, setDropDownDisplay] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -27,6 +28,8 @@ const UserProvider = ({ children }) => {
         setDisplayRL,
         firstClick,
         setFirstClick,
+        dropDownDisplay,
+        setDropDownDisplay,
       }}
     >
       {children}

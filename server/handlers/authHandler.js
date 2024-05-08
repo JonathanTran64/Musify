@@ -33,9 +33,10 @@ const registerUser = async (req, res) => {
     const hashedPassword = await hashPassword(password);
     // Create user
     const _id = uuidv4();
+    const favorites = [];
     const user = await db
       .collection("Users")
-      .insertOne({ _id, name, email, password: hashedPassword });
+      .insertOne({ _id, name, email, password: hashedPassword, favorites });
 
     return res.json(user);
   } catch (error) {

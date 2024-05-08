@@ -12,7 +12,7 @@ const {
   getCountry,
   getRnB,
   getRock,
-} = require("./handlers/handlers");
+} = require("./handlers/songHandlers");
 
 const {
   registerUser,
@@ -20,45 +20,30 @@ const {
   getProfile,
 } = require("./handlers/authHandler");
 
+const {
+  getFavorites,
+  patchAddFavorite,
+  patchRemoveFavorite,
+} = require("./handlers/favoritesHandlers");
+
 const PORT = process.env.PORT || 4000;
 express()
   .use(
     cors({
       credentials: true,
       origin: "https://musify-lac.vercel.app",
-      // origin: 'https://musify-lac.vercel.app/'
+      // origin: 'http://localhost:3000'
     })
   )
-  // .use(function (req, res, next) {
-  //   res.header(
-  //     "Access-Control-Allow-Methods",
-  //     "OPTIONS, HEAD, GET, PUT, POST, DELETE"
-  //   );
-  //   res.header(
-  //     "Access-Control-Allow-Headers",
-  //     "Origin, X-Requested-With, Content-Type, Accept"
-  //   );
-  //   next();
-  // })
-
-  .use((req, res, next) => {
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://musify-lac.vercel.app"
-    );
-    res.setHeader(
+  .use(function (req, res, next) {
+    res.header(
       "Access-Control-Allow-Methods",
-      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+      "OPTIONS, HEAD, GET, PUT, POST, DELETE"
     );
-    res.setHeader(
+    res.header(
       "Access-Control-Allow-Headers",
-      "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+      "Origin, X-Requested-With, Content-Type, Accept"
     );
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    res.setHeader("Access-Control-Allow-Private-Network", true);
-    //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-    res.setHeader("Access-Control-Max-Age", 7200);
-
     next();
   })
   .use(morgan("tiny"))
@@ -78,5 +63,9 @@ express()
   .post("/register", registerUser)
   .post("/login", loginUser)
   .get("/profile", getProfile)
+
+  .get("/:id/favorites", getFavorites)
+  .patch("/:id/addFavorite", patchAddFavorite)
+  .patch("/:id/removeFavorite", patchRemoveFavorite)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

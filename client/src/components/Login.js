@@ -22,6 +22,7 @@ const Login = () => {
     displayRL,
     setDisplayRL,
     user,
+    setUser,
     firstClick,
     setFirstClick,
   } = useContext(UserContext);
@@ -31,18 +32,15 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const { data } = await axios.post("/login", { email, password }, {});
+      const { data } = await axios.post("/login", { email, password });
       if (data.error) {
         toast.error(data.error);
       } else {
         toast.success("Login Successful. Welcome to MUSIFY! ");
+        setUser({ email: data.email, id: data._id, name: data.name });
         setData({ ...data, password: "", email: "" });
         setDarkDisplay(false);
         setDisplayRL(false);
-
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 1000);
       }
     } catch (error) {}
   };

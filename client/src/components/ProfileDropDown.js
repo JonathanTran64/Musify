@@ -2,24 +2,25 @@ import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const ProfileDropDown = () => {
-  const { dropDownDisplay, user, setUser } = useContext(UserContext);
+  const { dropDownDisplay, setDropDownDisplay, user, setUser } =
+    useContext(UserContext);
 
   const handleLogOut = () => {
     setUser(null);
+    setDropDownDisplay(false);
     toast.success("Logout Successful");
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
   };
 
   return (
     <Container>
       <Wrapper $display={dropDownDisplay ? "block" : "none"}>
-        <p>Favorites</p>
+        <Link to={"/favorites"}>
+          <p>Favorites</p>
+        </Link>
         <div></div>
         <p>Settings</p>
         <div></div>
@@ -41,11 +42,17 @@ const Wrapper = styled.div`
   position: absolute;
   width: 250px;
   height: 160px;
-  background-color: pink;
+  background-color: lightgray;
   border: 1px black solid;
   border-radius: 0px 0px 10px 10px;
   text-align: center;
   animation: dropdown 0.4s ease-out;
+  z-index: 2;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
   p {
     position: relative;
@@ -61,12 +68,17 @@ const Wrapper = styled.div`
   }
 
   button {
+    position: relative;
     margin-top: 15px;
+    animation: Pdropdown 0.4s ease-out;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 
   @keyframes dropdown {
     from {
-      height: 80px;
+      height: 120px;
     }
 
     to {

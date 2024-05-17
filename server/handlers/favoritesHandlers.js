@@ -28,7 +28,7 @@ const patchAddFavorite = async (req, res) => {
   const client = new MongoClient(MONGO_URI);
 
   try {
-    const { songName, artistName, albumCover, preview } = req.body;
+    const { songName, artistName, albumCover, preview, spotifyLink } = req.body;
     const { id } = req.params;
 
     await client.connect();
@@ -39,6 +39,7 @@ const patchAddFavorite = async (req, res) => {
       artistName: artistName,
       albumCover: albumCover,
       preview: preview,
+      spotifyLink: spotifyLink,
     };
 
     await db

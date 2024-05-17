@@ -31,8 +31,8 @@ express()
   .use(
     cors({
       credentials: true,
-      origin: "https://musify-lac.vercel.app",
-      // origin: 'http://localhost:3000'
+      origin: "http://localhost:3000",
+      // origin: 'https://musify-lac.vercel.app/'
     })
   )
   .use(function (req, res, next) {

@@ -4,15 +4,15 @@ import Home from "./Home";
 import GlobalStyles from "../GlobalStyles";
 import Answer from "./Answer";
 import SongProvider from "../context/SongContext";
+import Favorite from "../components/Favorite";
 
 import axios from "axios";
 import Login from "../components/Login";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "../context/UserContext";
-import Favorite from "../components/Favorite";
 
-axios.defaults.baseURL = "http://localhost:4000";
-// https://musifybackend.onrender.com
+axios.defaults.baseURL = "https://musifybackend.onrender.com";
+//
 axios.defaults.withCredentials = true;
 
 const App = () => {

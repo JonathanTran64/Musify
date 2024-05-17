@@ -59,12 +59,11 @@ const getSong = async (req, res, playlist) => {
 // KPOP
 const getKpop = async (req, res) => {
   const kpopArrayIds = [
-    "3Ir5YWemOTGRRfXgROrsDV",
-    "0jB4ANR4ox65etDMnxvGLp",
-    "2EoheVFjqIxgJMb8VnDRtZ",
     "37i9dQZF1DX9tPFwDMOaN1",
-    "6tQDMnj0qImEl6AKA1Uv74",
-    "4JcbaaznRdlWyzkXrDC7C6",
+    "3Ir5YWemOTGRRfXgROrsDV",
+    "3RoWb8YSy3vFVOYNaNWtIp",
+    "61HtPhUmp6qNVaAq8wcOQs",
+    "7DmYmaINse2wok7HB4MxLI",
   ];
 
   try {

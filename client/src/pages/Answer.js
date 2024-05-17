@@ -53,6 +53,7 @@ const Answer = () => {
       artistName: song.artistName,
       albumCover: song.albumCover,
       preview: song.preview,
+      spotifyLink: song.spotifyLink,
     });
   };
 
@@ -162,7 +163,7 @@ const Answer = () => {
               ? "Bravo!"
               : tries[5] === answer
               ? "That was close!"
-              : ":("}
+              : "Womp Womp :("}
           </Message>
           <FlexTries>
             {tries.map((string, i) => {

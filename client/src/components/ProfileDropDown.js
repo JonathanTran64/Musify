@@ -2,29 +2,38 @@ import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Favorite from "./Favorite";
 
 const ProfileDropDown = () => {
   const { dropDownDisplay, setDropDownDisplay, user, setUser } =
     useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     setUser(null);
     setDropDownDisplay(false);
     toast.success("Logout Successful");
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate("/");
   };
 
   return (
     <Container>
       <Wrapper $display={dropDownDisplay ? "block" : "none"}>
-        <Link to={"/favorites"}>
+        <button
+          onClick={() => {
+            setDropDownDisplay(false);
+            navigate("/favorites");
+          }}
+        >
           <p>Favorites</p>
-        </Link>
+        </button>
         <div></div>
-        <p>Settings</p>
-        <div></div>
-        <button onClick={handleLogOut}>Log Out</button>
+        <button onClick={handleLogOut}>
+          <p>Log Out</p>
+        </button>
       </Wrapper>
     </Container>
   );
@@ -32,7 +41,7 @@ const ProfileDropDown = () => {
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 1115px;
+  width: 1065px;
   display: flex;
   justify-content: flex-end;
 `;
@@ -40,24 +49,14 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: ${(props) => props.$display};
   position: absolute;
-  width: 250px;
-  height: 160px;
-  background-color: lightgray;
+  width: 200px;
+  height: 105px;
+  background-color: var(--seconds);
   border: 1px black solid;
   border-radius: 0px 0px 10px 10px;
   text-align: center;
   animation: dropdown 0.4s ease-out;
   z-index: 2;
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
-
-  p {
-    position: relative;
-    animation: Pdropdown 0.4s ease-out;
-  }
 
   div {
     width: 100%;
@@ -69,7 +68,6 @@ const Wrapper = styled.div`
 
   button {
     position: relative;
-    margin-top: 15px;
     animation: Pdropdown 0.4s ease-out;
     border: none;
     background-color: transparent;
@@ -78,11 +76,11 @@ const Wrapper = styled.div`
 
   @keyframes dropdown {
     from {
-      height: 120px;
+      height: 80px;
     }
 
     to {
-      height: 160px;
+      height: 105px;
     }
   }
 

@@ -9,7 +9,7 @@ html {
 
 body {
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden ;
 
   @media (max-width: 1024px) {
     overflow-y: visible;

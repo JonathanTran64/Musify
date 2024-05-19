@@ -11,6 +11,7 @@ import InputSkipSubmit from "../components/InputSkipSubmit";
 import { SongContext } from "../context/SongContext";
 import PlayButton from "../components/PlayButton";
 import NavBar from "../components/NavBar";
+import Streak from "../components/Streak";
 
 const SongGame = () => {
   // number of seconds allowed to play
@@ -39,9 +40,7 @@ const SongGame = () => {
   useEffect(() => {
     const getSong = async () => {
       try {
-        const response = await axios.get(
-          `https://musifybackend.onrender.com/${genre}`
-        );
+        const response = await axios.get(`http://localhost:4000/${genre}`);
         //
         const { song, songsArray } = await response.data;
         setSong(song);
@@ -102,6 +101,7 @@ const SongGame = () => {
     <>
       <NavBar genre={genre} />
       <Container>
+        <Streak />
         <GuessBoxWrapper>
           {/* GUESS BOXES */}
           {tries.map((tryAnswer, index) => (
@@ -126,8 +126,7 @@ const SongGame = () => {
                             <ButtonSuggestions
                               onClick={() => {
                                 setInputGuess(song + " ");
-                              }}
-                            >
+                              }}>
                               {song}
                             </ButtonSuggestions>
                           </div>
@@ -177,9 +176,8 @@ const SongGame = () => {
 
 const Container = styled.div`
   padding-top: 30px;
-  overflow-x: hidden;
   background-color: var(--background);
-  height: 100vh;
+  height: 95vh;
 `;
 
 const GuessBoxWrapper = styled.div`

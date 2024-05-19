@@ -52,7 +52,7 @@ const Favorite = () => {
   return (
     <>
       <NavBar />
-      <Container>
+      <Container $height={favoritesArray.length !== 0 ? "100%" : "100vh"}>
         <FlexSong>
           {user && favoritesArray.length !== 0 ? (
             favoritesArray.map((obj, index) => (
@@ -96,8 +96,7 @@ const Favorite = () => {
 
 const Container = styled.div`
   background-color: var(--background);
-  height: 100vh;
-  overflow: auto;
+  height: ${(props) => props.$height};
 `;
 
 const FlexSong = styled.div`

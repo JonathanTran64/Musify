@@ -29,7 +29,7 @@ const Answer = () => {
 
   const { song, setSong, tries, setTries } = useContext(SongContext);
   // user info
-  const { user } = useContext(UserContext);
+  const { user, setGameOver } = useContext(UserContext);
 
   const { genre } = useParams();
 
@@ -42,6 +42,7 @@ const Answer = () => {
   // Click New Game button
   const handleNewGame = () => {
     setTries(["", "", "", "", "", ""]);
+    setGameOver([false, false]);
     setSong("");
     navigate(`/genre/${genre}`);
   };
@@ -106,9 +107,12 @@ const Answer = () => {
 
   // Check to see if user got a the good answer
   useEffect(() => {
-    tries.forEach((string) => {
+    tries.forEach((string, i) => {
       if (string === answer) {
         setWin(true);
+        setGameOver([true, true]);
+      } else if (i === 6 && win === false) {
+        setGameOver([true, false]);
       }
     });
   }, [tries]);
@@ -127,8 +131,7 @@ const Answer = () => {
         <HeartContainer>
           <HeartWrapper
             onClick={handleFavorite}
-            $animate={animateHeart ? "heart 0.3s ease-out" : "none"}
-          >
+            $animate={animateHeart ? "heart 0.3s ease-out" : "none"}>
             {!favorites ? (
               <img src={heartWhiteIcon} alt="heartWhite" />
             ) : (
@@ -178,8 +181,7 @@ const Answer = () => {
                       : string === ""
                       ? "white"
                       : "#bc4749"
-                  }
-                ></Tries>
+                  }></Tries>
               );
             })}
           </FlexTries>

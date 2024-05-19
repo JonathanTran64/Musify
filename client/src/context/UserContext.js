@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [displayRL, setDisplayRL] = useState(false);
   const [firstClick, setFirstClick] = useState(false);
   const [dropDownDisplay, setDropDownDisplay] = useState(false);
+  const [gameOver, setGameOver] = useState([false, false]);
 
   useEffect(() => {
     if (!user) {
@@ -31,8 +32,9 @@ const UserProvider = ({ children }) => {
         setFirstClick,
         dropDownDisplay,
         setDropDownDisplay,
-      }}
-    >
+        gameOver,
+        setGameOver,
+      }}>
       {children}
     </UserContext.Provider>
   );

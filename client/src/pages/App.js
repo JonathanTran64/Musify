@@ -10,8 +10,9 @@ import axios from "axios";
 import Login from "../components/Login";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "../context/UserContext";
+import Footer from "../components/Footer";
 
-axios.defaults.baseURL = "https://musifybackend.onrender.com";
+axios.defaults.baseURL = "http://localhost:4000";
 //
 axios.defaults.withCredentials = true;
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/favorites" element={<Favorite />} />
             <Route path="*" element={<h1>404 page not found</h1>} />
           </Routes>
+          <Footer />
         </Router>
       </SongProvider>
     </UserProvider>

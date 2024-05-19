@@ -26,7 +26,7 @@ const {
   patchRemoveFavorite,
 } = require("./handlers/favoritesHandlers");
 
-const { getStreaks } = require("./handlers/streakHandler");
+const { getStreaks, updateStreaks } = require("./handlers/streakHandler");
 
 const PORT = process.env.PORT || 4000;
 express()
@@ -71,5 +71,6 @@ express()
   .patch("/:id/removeFavorite", patchRemoveFavorite)
 
   .get("/streaks/:id", getStreaks)
+  .patch("/updateStreaks/:id", updateStreaks)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

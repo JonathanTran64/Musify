@@ -5,11 +5,14 @@ const GlobalStyles = createGlobalStyle`
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */ 
+  height: 100%;
+  background-color: var(--background)
 }
 
 body {
   margin: 0;
   overflow-x: hidden ;
+  height: 100%;
 
   @media (max-width: 1024px) {
     overflow-y: visible;

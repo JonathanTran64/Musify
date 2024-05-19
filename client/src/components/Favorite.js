@@ -96,7 +96,10 @@ const Favorite = () => {
 
 const Container = styled.div`
   background-color: var(--background);
-  height: ${(props) => props.$height};
+  height: 100%;
+  @media (max-width: 1600px) {
+    height: ${(props) => props.$height};
+  }
 `;
 
 const FlexSong = styled.div`

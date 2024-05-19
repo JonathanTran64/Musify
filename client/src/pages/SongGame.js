@@ -12,6 +12,7 @@ import { SongContext } from "../context/SongContext";
 import PlayButton from "../components/PlayButton";
 import NavBar from "../components/NavBar";
 import Streak from "../components/Streak";
+import Footer from "../components/Footer";
 
 const SongGame = () => {
   // number of seconds allowed to play
@@ -126,7 +127,8 @@ const SongGame = () => {
                             <ButtonSuggestions
                               onClick={() => {
                                 setInputGuess(song + " ");
-                              }}>
+                              }}
+                            >
                               {song}
                             </ButtonSuggestions>
                           </div>
@@ -170,6 +172,7 @@ const SongGame = () => {
           </>
         )}
       </Container>
+      <Footer />
     </>
   );
 };

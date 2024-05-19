@@ -9,7 +9,7 @@ const Streak = () => {
   const [currentStreak, setCurrentStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
 
-  const { user, gameOver } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const getStreaks = async () => {
@@ -22,17 +22,6 @@ const Streak = () => {
     };
     getStreaks();
   }, [user]);
-
-  //   Game Over update streak
-  useEffect(() => {
-    if (gameOver[0] === true) {
-      if (gameOver[1] === true) {
-        setCurrentStreak(currentStreak + 1);
-      } else if (gameOver[1] === false) {
-        setCurrentStreak(0);
-      }
-    }
-  }, [gameOver]);
 
   return (
     <Container>

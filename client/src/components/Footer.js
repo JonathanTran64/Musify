@@ -4,16 +4,23 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <Container>
-      <FlexWrapper>
-        <p> &copy;2024 MUSIFY | Jonathan Tran </p>
-        <Link to={"https://github.com/JonathanTran64"} target="blank">
-          <img src={githubIcon} alt="gitHubIcon" />
-        </Link>
-      </FlexWrapper>
-    </Container>
+    <Wrapper>
+      <Container>
+        <FlexWrapper>
+          <p> &copy;2024 MUSIFY | Jonathan Tran </p>
+          <Link to={"https://github.com/JonathanTran64"} target="blank">
+            <img src={githubIcon} alt="gitHubIcon" />
+          </Link>
+        </FlexWrapper>
+      </Container>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  position: absolute;
+  bottom: 1px;
+`;
 
 const Container = styled.footer`
   width: 100%;

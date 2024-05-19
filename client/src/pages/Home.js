@@ -10,6 +10,7 @@ import countryImage from "../assets/country.png";
 import rnbImage from "../assets/rnb.jpg";
 import rockImage from "../assets/rock.png";
 import arrowDownImage from "../assets/arrowDown.png";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const genres = [
@@ -39,6 +40,7 @@ const Home = () => {
           );
         })}
       </Container>
+      <Footer />
     </Wrapper>
   );
 };

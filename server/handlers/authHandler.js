@@ -34,9 +34,17 @@ const registerUser = async (req, res) => {
     // Create user
     const _id = uuidv4();
     const favorites = [];
-    const user = await db
-      .collection("Users")
-      .insertOne({ _id, name, email, password: hashedPassword, favorites });
+    const currentStreak = 0;
+    const bestStreak = 0;
+    const user = await db.collection("Users").insertOne({
+      _id,
+      name,
+      email,
+      password: hashedPassword,
+      favorites,
+      currentStreak,
+      bestStreak,
+    });
 
     return res.json(user);
   } catch (error) {

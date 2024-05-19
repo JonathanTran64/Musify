@@ -26,12 +26,14 @@ const {
   patchRemoveFavorite,
 } = require("./handlers/favoritesHandlers");
 
+const { getStreaks } = require("./handlers/streakHandler");
+
 const PORT = process.env.PORT || 4000;
 express()
   .use(
     cors({
       credentials: true,
-      origin: "https://musify-lac.vercel.app",
+      origin: "http://localhost:3000",
       // origin: 'https://musify-lac.vercel.app'
     })
   )
@@ -67,5 +69,7 @@ express()
   .get("/:id/favorites", getFavorites)
   .patch("/:id/addFavorite", patchAddFavorite)
   .patch("/:id/removeFavorite", patchRemoveFavorite)
+
+  .get("/streaks/:id", getStreaks)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

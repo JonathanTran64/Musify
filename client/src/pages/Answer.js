@@ -17,6 +17,8 @@ import toast from "react-hot-toast";
 import styled from "styled-components";
 import axios from "axios";
 import Footer from "../components/Footer";
+import LeaderBoard from "../components/LeaderBoard";
+import Streak from "../components/Streak";
 
 const Answer = () => {
   // track is playing state
@@ -209,6 +211,7 @@ const Answer = () => {
           </NewGame>
         </TriesWrapper>
       </Wrapper>
+      <LeaderBoard genre={genre === "HIP-HOP" ? "hiphop" : genre} />
       <audio ref={audioAnswerRef} src={song.preview} />
       <SongProgressBar isPlaying={isPlaying} seconds={"30s"} display={"none"} />
       <PlayButton

@@ -54,6 +54,7 @@ const Container = styled.div`
   width: 300px;
   height: 300px;
   border: 1px white solid;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
   @media (max-width: 1600px) {
     left: 50px;

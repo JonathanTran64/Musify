@@ -120,7 +120,7 @@ const SongContainer = styled.div`
   border: 1px white solid;
   background-color: var(--seconds);
   border-radius: 3px;
-
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   audio::-webkit-media-controls-panel {
     background-color: var(--seconds);
   }

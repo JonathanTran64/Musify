@@ -20,7 +20,7 @@ const LeaderBoard = ({ genre }) => {
 
   return (
     <Container>
-      <h2>LEADER BOARD - {genre}</h2>
+      <h2>LEADER BOARD - {genre === "hiphop" ? "HIP-HOP" : genre}</h2>
       <FlexHeaders>
         <h3>RANK</h3>
         <h3>USERNAME</h3>

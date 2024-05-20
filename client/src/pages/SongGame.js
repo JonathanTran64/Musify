@@ -105,7 +105,7 @@ const SongGame = () => {
     <>
       <NavBar genre={genre} />
       <Container>
-        <Streak genre={genre} />
+        <Streak genre={genre === "HIP-HOP" ? "hiphop" : genre} />
         <GuessBoxWrapper>
           {/* GUESS BOXES */}
           {tries.map((tryAnswer, index) => (
@@ -116,7 +116,7 @@ const SongGame = () => {
             />
           ))}
         </GuessBoxWrapper>
-        <LeaderBoard genre={genre} />
+        <LeaderBoard genre={genre === "HIP-HOP" ? "hiphop" : genre} />
         {song ? (
           <>
             <audio ref={audioRef} src={song.preview} />

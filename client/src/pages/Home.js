@@ -56,6 +56,7 @@ const WelcomeWrapper = styled.div`
   color: var(--suggestText);
   h1 {
     margin: 0;
+    font-size: 60px;
   }
 
   img {

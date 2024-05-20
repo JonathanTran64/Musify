@@ -112,10 +112,11 @@ const Answer = () => {
     setIsPlaying(true);
   }, [audioAnswerRef]);
 
+  // Update streak
   const updateStreaks = async (streak) => {
     if (user) {
       try {
-        await axios.patch(`/updateStreaks/${user.id}`, { streak });
+        await axios.patch(`/updateStreaks/${genre}/${user.id}`, { streak });
       } catch (error) {
         console.error("Failed to update streak", error);
       }

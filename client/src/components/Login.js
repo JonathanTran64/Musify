@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
 import { toast } from "react-hot-toast";
 import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
@@ -8,7 +8,7 @@ import xIconGrey from "../assets/xIconGrey.png";
 const Login = () => {
   // user's input
   const [data, setData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -37,7 +37,7 @@ const Login = () => {
         toast.error(data.error);
       } else {
         toast.success("Login Successful. Welcome to MUSIFY! ");
-        setUser({ email: data.email, id: data._id, name: data.name });
+        setUser({ email: data.email, id: data._id, username: data.username });
         setData({ ...data, password: "", email: "" });
         setDarkDisplay(false);
         setDisplayRL(false);
@@ -48,18 +48,18 @@ const Login = () => {
   // POST Register
   const handleRegister = async (e) => {
     e.preventDefault();
-    const { name, email, password } = data;
+    const { username, email, password } = data;
 
     try {
       const { data } = await axios.post("/register", {
-        name,
+        username,
         email,
         password,
       });
       if (data.error) {
         toast.error(data.error);
       } else {
-        setData({ ...data, name: "", password: "", email: "" });
+        setData({ ...data, username: "", password: "", email: "" });
         toast.success("Register Successful. Please log in.");
         setDisplayLogIn(true);
       }
@@ -79,7 +79,7 @@ const Login = () => {
       setDisplayLogIn(true);
     }
 
-    setData({ ...data, name: "", password: "", email: "" });
+    setData({ ...data, username: "", password: "", email: "" });
   };
 
   return (
@@ -117,12 +117,12 @@ const Login = () => {
           {/* REGISTER */}
           <DisplayForm $display={displayLogIn ? "none" : "block"}>
             <Form onSubmit={handleRegister}>
-              <label>N A M E</label>
+              <label>U S E R N A M E</label>
               <input
                 type="text"
-                placeholder="Name"
-                value={data.name}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
+                placeholder="UserName"
+                value={data.username}
+                onChange={(e) => setData({ ...data, username: e.target.value })}
                 required
               />
               <label>E M A I L</label>

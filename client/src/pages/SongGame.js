@@ -13,6 +13,7 @@ import PlayButton from "../components/PlayButton";
 import NavBar from "../components/NavBar";
 import Streak from "../components/Streak";
 import Footer from "../components/Footer";
+import LeaderBoard from "../components/LeaderBoard";
 
 const SongGame = () => {
   // number of seconds allowed to play
@@ -41,7 +42,9 @@ const SongGame = () => {
   useEffect(() => {
     const getSong = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/${genre}`);
+        const response = await axios.get(
+          `https://musifybackend.onrender.com/${genre}`
+        );
         //
         const { song, songsArray } = await response.data;
         setSong(song);
@@ -102,7 +105,7 @@ const SongGame = () => {
     <>
       <NavBar genre={genre} />
       <Container>
-        <Streak />
+        <Streak genre={genre} />
         <GuessBoxWrapper>
           {/* GUESS BOXES */}
           {tries.map((tryAnswer, index) => (
@@ -113,6 +116,7 @@ const SongGame = () => {
             />
           ))}
         </GuessBoxWrapper>
+        <LeaderBoard genre={genre} />
         {song ? (
           <>
             <audio ref={audioRef} src={song.preview} />

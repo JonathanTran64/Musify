@@ -5,46 +5,69 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 
-const Streak = () => {
+const Streak = ({ genre }) => {
   const [currentStreak, setCurrentStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useContext(UserContext);
 
   useEffect(() => {
     const getStreaks = async () => {
       if (user) {
-        const response = await axios.get(`/streaks/${user.id}`);
-        const { currentStreak, bestStreak } = await response.data;
-        setCurrentStreak(currentStreak);
-        setBestStreak(bestStreak);
+        try {
+          const response = await axios.get(`/streaks/${genre}/${user.id}`);
+          const { currentStreak, bestStreak } = response.data;
+          setCurrentStreak(currentStreak);
+          setBestStreak(bestStreak);
+        } catch (error) {
+          console.error("Error fetching streaks:", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
       }
     };
     getStreaks();
   }, [user]);
-
   return (
-    <Container>
+    <Container $display={user ? "block" : "none"}>
       <FlexHeader>
-        <Icon src={fireIcon} alt="fireIcon" $top="21px" $left="30px" />
+        <IconFire src={fireIcon} alt="fireIcon" />
         <Header>Current Streak</Header>
       </FlexHeader>
-      <Number>{user ? currentStreak : "login"}</Number>
+      <Number>{loading ? "..." : user ? currentStreak : null}</Number>
       <FlexHeader>
-        <Icon src={crownIcon} alt="crownIcon" $top="146px" $left="40px" />
+        <IconCrown src={crownIcon} alt="crownIcon" />
         <Header>Best Streak</Header>
       </FlexHeader>
-      <Number>{user ? bestStreak : "login"}</Number>
+      <Number> {loading ? "..." : user ? bestStreak : null}</Number>
     </Container>
   );
 };
 
 const Container = styled.div`
+  display: ${(props) => props.$display};
   position: absolute;
-  left: 50px;
+  left: 150px;
   width: 300px;
   height: 300px;
   border: 1px white solid;
+
+  @media (max-width: 1600px) {
+    left: 50px;
+  }
+
+  @media (max-width: 1400px) {
+    left: 50px;
+    width: 250px;
+    height: 250px;
+  }
+
+  @media (max-width: 1300px) {
+    display: none;
+  }
 `;
 
 const FlexHeader = styled.div`
@@ -55,14 +78,36 @@ const Header = styled.h2`
   margin: 25px auto;
   color: white;
   text-align: center;
+
+  @media (max-width: 1400px) {
+    font-size: 20px;
+  }
 `;
 
-const Icon = styled.img`
+const IconFire = styled.img`
   position: absolute;
-  top: ${(props) => props.$top};
-  left: ${(props) => props.$left};
+  top: 21px;
+  left: 30px;
   width: 30px;
   object-fit: contain;
+
+  @media (max-width: 1400px) {
+    left: 20px;
+    top: 18px;
+  }
+`;
+
+const IconCrown = styled.img`
+  position: absolute;
+  top: 146px;
+  left: 40px;
+  width: 30px;
+  object-fit: contain;
+
+  @media (max-width: 1400px) {
+    left: 30px;
+    top: 133px;
+  }
 `;
 
 const Number = styled.h2`
@@ -70,6 +115,10 @@ const Number = styled.h2`
   margin: 0;
   text-align: center;
   font-size: 40px;
-  text-decoration: 1px white solid;
+
+  @media (max-width: 1400px) {
+    font-size: 35px;
+  }
 `;
+
 export default Streak;

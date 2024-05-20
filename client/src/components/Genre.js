@@ -65,5 +65,6 @@ const Container = styled.button`
 
   @media (max-width: 1600px) {
     width: 200px;
+    height: 500px;
   }
 `;

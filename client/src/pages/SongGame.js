@@ -42,9 +42,7 @@ const SongGame = () => {
   useEffect(() => {
     const getSong = async () => {
       try {
-        const response = await axios.get(
-          `https://musifybackend.onrender.com/${genre}`
-        );
+        const response = await axios.get(`http://localhost:4000/${genre}`);
         //
         const { song, songsArray } = await response.data;
         setSong(song);

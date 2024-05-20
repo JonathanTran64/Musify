@@ -11,7 +11,7 @@ import Login from "../components/Login";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "../context/UserContext";
 
-axios.defaults.baseURL = "https://musifybackend.onrender.com";
+axios.defaults.baseURL = "http://localhost:4000";
 //
 axios.defaults.withCredentials = true;
 

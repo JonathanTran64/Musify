@@ -13,7 +13,7 @@ const registerUser = async (req, res) => {
   await client.connect();
   try {
     const db = client.db("Data");
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     // Check password
     if (password.length < 6) {
@@ -34,16 +34,21 @@ const registerUser = async (req, res) => {
     // Create user
     const _id = uuidv4();
     const favorites = [];
-    const currentStreak = 0;
-    const bestStreak = 0;
+    const streaks = {
+      kpop: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      pop: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      hiphop: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      country: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      rock: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      rnb: [{ currentStreak: 0 }, { bestStreak: 0 }],
+    };
     const user = await db.collection("Users").insertOne({
       _id,
-      name,
+      username,
       email,
       password: hashedPassword,
       favorites,
-      currentStreak,
-      bestStreak,
+      streaks,
     });
 
     return res.json(user);
@@ -78,7 +83,7 @@ const loginUser = async (req, res) => {
     const match = await comparePassword(password, user.password);
     if (match) {
       jwt.sign(
-        { email: user.email, id: user._id, name: user.name },
+        { email: user.email, id: user._id, name: user.username },
         process.env.JWT_SECRET,
         {},
         (err, token) => {

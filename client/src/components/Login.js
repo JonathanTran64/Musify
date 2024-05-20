@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import styled from "styled-components";
 import { UserContext } from "../context/UserContext";
 import xIconGrey from "../assets/xIconGrey.png";
+import loadingGif from "../assets/loading.gif";
 
 const Login = () => {
   // user's input
@@ -15,6 +16,8 @@ const Login = () => {
 
   // display login or register
   const [displayLogIn, setDisplayLogIn] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   // context
   const {
@@ -32,6 +35,7 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     try {
+      setLoading(true);
       const { data } = await axios.post("/login", { email, password });
       if (data.error) {
         toast.error(data.error);
@@ -41,6 +45,7 @@ const Login = () => {
         setData({ ...data, password: "", email: "" });
         setDarkDisplay(false);
         setDisplayRL(false);
+        setLoading(false);
       }
     } catch (error) {}
   };
@@ -51,17 +56,20 @@ const Login = () => {
     const { username, email, password } = data;
 
     try {
+      setLoading(true);
       const { data } = await axios.post("/register", {
         username,
         email,
         password,
       });
+
       if (data.error) {
         toast.error(data.error);
       } else {
         setData({ ...data, username: "", password: "", email: "" });
         toast.success("Register Successful. Please log in.");
         setDisplayLogIn(true);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -141,7 +149,11 @@ const Login = () => {
                 onChange={(e) => setData({ ...data, password: e.target.value })}
                 required
               />
-              <SubmitButton type="submit">Register</SubmitButton>
+              {loading ? (
+                <img src={loadingGif} alt="loadingGif" />
+              ) : (
+                <SubmitButton type="submit">Register</SubmitButton>
+              )}
             </Form>
           </DisplayForm>
 
@@ -168,7 +180,12 @@ const Login = () => {
                 onChange={(e) => setData({ ...data, password: e.target.value })}
                 required
               />
-              <SubmitButton type="submit">Login</SubmitButton>
+
+              {loading ? (
+                <img src={loadingGif} alt="loadingGif" />
+              ) : (
+                <SubmitButton type="submit">Login</SubmitButton>
+              )}
             </Form>
           </DisplayForm>
         </FormFlex>
@@ -293,6 +310,10 @@ const Form = styled.form`
     padding: 10px 0px 10px 5px;
     width: 250px;
     margin: 15px;
+  }
+
+  img {
+    width: 50px;
   }
 `;
 

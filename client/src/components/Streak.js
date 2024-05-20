@@ -56,11 +56,11 @@ const Container = styled.div`
   border: 1px white solid;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
-  @media (max-width: 1600px) {
+  @media (max-width: 1650px) {
     left: 50px;
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     left: 50px;
     width: 250px;
     height: 250px;
@@ -80,7 +80,7 @@ const Header = styled.h2`
   color: white;
   text-align: center;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     font-size: 20px;
   }
 `;
@@ -92,7 +92,7 @@ const IconFire = styled.img`
   width: 30px;
   object-fit: contain;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     left: 20px;
     top: 18px;
   }
@@ -105,7 +105,7 @@ const IconCrown = styled.img`
   width: 30px;
   object-fit: contain;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     left: 30px;
     top: 133px;
   }
@@ -117,7 +117,7 @@ const Number = styled.h2`
   text-align: center;
   font-size: 40px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     font-size: 35px;
   }
 `;

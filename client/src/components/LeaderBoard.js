@@ -82,12 +82,12 @@ const Container = styled.div`
     margin-bottom: 0;
   }
 
-  @media (max-width: 1600px) {
-    right: 10px;
+  @media (max-width: 1650px) {
+    right: 50px;
     width: 350px;
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     width: 280px;
     height: 300px;
     right: 20px;
@@ -112,7 +112,7 @@ const FlexHeaders = styled.div`
     color: white;
   }
 
-  @media (max-width: 1600px) {
+  @media (max-width: 1650px) {
     h3 {
       font-size: 15px;
     }
@@ -134,12 +134,12 @@ const FlexUser = styled.div`
     color: ${(props) => props.$color};
   }
 
-  @media (max-width: 1600px) {
+  @media (max-width: 1650px) {
     width: 260px;
     margin-left: 40px;
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1500px) {
     width: 215px;
     margin-left: 30px;
   }

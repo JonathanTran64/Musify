@@ -29,8 +29,8 @@ const Container = styled.button`
   border-radius: 10px;
   background-image: url(${(props) => props.$image});
   background-size: cover;
+  transition: width 0.2s linear, box-shadow 0.2s linear, border 0.1s linear;
 
-  transition: width 0.3s linear, box-shadow 0.3s linear, border 0.1s linear;
   box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px,
     rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px,
     rgba(240, 46, 170, 0.05) 0px 25px;

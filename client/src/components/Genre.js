@@ -12,45 +12,58 @@ const Genre = ({ genre, image }) => {
   };
 
   return (
-    <Container>
-      <button onClick={handleClick}>
-        <img src={image} />
-        <h2>{genre}</h2>
-      </button>
+    <Container onClick={handleClick} $image={image}>
+      <h2>{genre}</h2>
     </Container>
   );
 };
 
 export default Genre;
 
-const Container = styled.div`
-  width: 300px;
+const Container = styled.button`
+  margin: 0 10px;
+  width: 260px;
+  height: 600px;
+  cursor: pointer;
+  border: 1px var(--guessBox) solid;
+  border-radius: 10px;
+  background-image: url(${(props) => props.$image});
+  background-size: cover;
 
-  button {
-    cursor: pointer;
-    padding: 0;
-    background-color: transparent;
-    height: 190px;
-    border: none;
+  transition: width 0.3s linear, box-shadow 0.3s linear, border 0.1s linear;
+  box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px,
+    rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px,
+    rgba(240, 46, 170, 0.05) 0px 25px;
+
+  &:hover {
+    width: 400px;
+    box-shadow: rgba(255, 215, 0, 0.4) 0px 5px, rgba(255, 215, 0, 0.3) 0px 10px,
+      rgba(255, 215, 0, 0.2) 0px 15px, rgba(255, 215, 0, 0.1) 0px 20px,
+      rgba(255, 215, 0, 0.05) 0px 25px;
+    border: 1px gold solid;
+
+    h2 {
+      color: gold;
+    }
+
+    @media (max-width: 1600px) {
+      width: 350px;
+    }
   }
 
   h2 {
     position: relative;
-    bottom: 110px;
+    bottom: 10px;
     margin: 0 auto;
     text-align: center;
     color: white;
   }
 
-  img {
-    width: 300px;
-    height: 190px;
-    border: 1px var(--guessBox) solid;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-
   a {
     text-decoration: none;
+  }
+
+  @media (max-width: 1600px) {
+    width: 200px;
   }
 `;

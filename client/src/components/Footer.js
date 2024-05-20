@@ -18,13 +18,12 @@ const Footer = () => {
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  bottom: 1px;
+  position: relative;
+  top: 115px;
 `;
 
 const Container = styled.footer`
   width: 100%;
-  background-color: var(--background);
   padding: 20px;
 `;
 

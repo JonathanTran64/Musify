@@ -175,8 +175,8 @@ const SongGame = () => {
             <Loading>Loading player...</Loading>
           </>
         )}
+        <Footer />
       </Container>
-      <Footer />
     </>
   );
 };

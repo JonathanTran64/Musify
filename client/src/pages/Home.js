@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Genre from "../components/Genre";
 import NavBar from "../components/NavBar";
 
-import kpopImage from "../assets/kpop.jpg";
+import kpopImage from "../assets/kpop.png";
 import popImage from "../assets/pop.png";
 import hiphopImage from "../assets/hip-hop.png";
 import countryImage from "../assets/country.png";
-import rnbImage from "../assets/rnb.jpg";
+import rnbImage from "../assets/rnb.png";
 import rockImage from "../assets/rock.png";
 import arrowDownImage from "../assets/arrowDown.png";
 import Footer from "../components/Footer";
@@ -66,11 +66,9 @@ const WelcomeWrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  width: 1000px;
+  justify-content: center;
+  width: 100%;
   height: 500px;
-  flex-wrap: wrap;
 `;
 
 export default Home;

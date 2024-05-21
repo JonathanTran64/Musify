@@ -41,6 +41,7 @@ const registerUser = async (req, res) => {
       country: [{ currentStreak: 0 }, { bestStreak: 0 }],
       rock: [{ currentStreak: 0 }, { bestStreak: 0 }],
       rnb: [{ currentStreak: 0 }, { bestStreak: 0 }],
+      custom: [{ currentStreak: 0 }, { bestStreak: 0 }],
     };
     const user = await db.collection("Users").insertOne({
       _id,

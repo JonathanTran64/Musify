@@ -12,6 +12,7 @@ const {
   getCountry,
   getRnB,
   getRock,
+  postCustom,
 } = require("./handlers/songHandlers");
 
 const {
@@ -38,7 +39,7 @@ express()
     cors({
       credentials: true,
       origin: "https://musify-lac.vercel.app",
-      // origin: ''
+      // origin: 'https://musify-lac.vercel.app'
     })
   )
   .use(function (req, res, next) {
@@ -65,6 +66,7 @@ express()
   .get("/country", getCountry)
   .get("/r&b", getRnB)
   .get("/rock", getRock)
+  .post("/custom", postCustom)
 
   .post("/register", registerUser)
   .post("/login", loginUser)

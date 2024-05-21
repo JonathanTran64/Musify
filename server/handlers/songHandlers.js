@@ -118,7 +118,7 @@ const getPop = async (req, res) => {
 
 // HIP-HOP
 const getHipHop = async (req, res) => {
-  const popArrayIds = [
+  const hiphopArrayIds = [
     "0dMexqq0XIWS3QJ74z3ZhD",
     "5TZkls9cEOzWDR6qCxwDot",
     "37i9dQZF1EQnqst5TRi17F",
@@ -126,7 +126,7 @@ const getHipHop = async (req, res) => {
   ];
 
   try {
-    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    const { song, songsArray } = await getSong(req, res, hiphopArrayIds);
     if (song) {
       res.status(200).json({
         status: 200,
@@ -146,14 +146,14 @@ const getHipHop = async (req, res) => {
 
 // COUNTRY
 const getCountry = async (req, res) => {
-  const popArrayIds = [
+  const countryArrayIds = [
     "4Jb4PDWREzNnbZcOHPcZPy",
     "02t75h5hsNOw4VlC1Qad9Z",
     "3FSvK3GkiECDMHeeIbbJIn",
   ];
 
   try {
-    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    const { song, songsArray } = await getSong(req, res, countryArrayIds);
     if (song) {
       res.status(200).json({
         status: 200,
@@ -173,14 +173,14 @@ const getCountry = async (req, res) => {
 
 // R&B
 const getRnB = async (req, res) => {
-  const popArrayIds = [
+  const rnbArrayIds = [
     "5zCdhPJHI9kgYsgkSBEWT0",
     "2T3BSpqN34Z4sppHDNWoeE",
     "37i9dQZF1DX2WkIBRaChxW",
   ];
 
   try {
-    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    const { song, songsArray } = await getSong(req, res, rnbArrayIds);
     if (song) {
       res.status(200).json({
         status: 200,
@@ -200,14 +200,14 @@ const getRnB = async (req, res) => {
 
 // ROCK
 const getRock = async (req, res) => {
-  const popArrayIds = [
+  const rockArrayIds = [
     "1ti3v0lLrJ4KhSTuxt4loZ",
     "0ImbTL9gm01nStEsaCmj16",
     "37i9dQZF1EQpj7X7UK8OOF",
   ];
 
   try {
-    const { song, songsArray } = await getSong(req, res, popArrayIds);
+    const { song, songsArray } = await getSong(req, res, rockArrayIds);
     if (song) {
       res.status(200).json({
         status: 200,
@@ -225,4 +225,54 @@ const getRock = async (req, res) => {
   }
 };
 
-module.exports = { getKpop, getPop, getHipHop, getCountry, getRnB, getRock };
+const postCustom = async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const { playlists } = req.body;
+    console.log(playlists);
+
+    const extractedPlaylists = [];
+
+    for (const key in playlists) {
+      if (Object.hasOwnProperty.call(playlists, key)) {
+        const playlistLink = playlists[key];
+
+        // Check if the playlist link is empty
+        if (playlistLink.trim() !== "") {
+          const parts = playlistLink.split("/");
+          const playlistIdentifier = parts[4].split("?")[0];
+          extractedPlaylists.push(playlistIdentifier);
+        }
+      }
+    }
+
+    console.log(extractedPlaylists);
+
+    const { song, songsArray } = await getSong(req, res, extractedPlaylists);
+    if (song) {
+      res.status(200).json({
+        status: 200,
+        song,
+        songsArray,
+        message: "success",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      error: "Internal Server Error",
+    });
+  }
+};
+
+module.exports = {
+  getKpop,
+  getPop,
+  getHipHop,
+  getCountry,
+  getRnB,
+  getRock,
+  postCustom,
+};

@@ -80,7 +80,7 @@ const Container = styled.div`
   background: linear-gradient(
     to bottom,
     rgba(100, 150, 100, 1),
-    rgba(200, 200, 200, 1)
+    rgba(100, 100, 100, 1)
   );
 
   margin: 50px auto;

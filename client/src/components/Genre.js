@@ -2,13 +2,33 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SongContext } from "../context/SongContext";
+import { UserContext } from "../context/UserContext";
 const Genre = ({ genre, image }) => {
-  const { setSong } = useContext(SongContext);
+  const {
+    setSong,
+    setCustomGenre,
+    setPlaylist,
+    setCustomPlaylist,
+    setCustomSubmit,
+  } = useContext(SongContext);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     setSong("");
     navigate(`/genre/${genre}`);
+    if (genre === "CUSTOM") {
+      setCustomGenre(true);
+      setPlaylist({
+        playlist1: "",
+        playlist2: "",
+        playlist3: "",
+      });
+      setCustomPlaylist(false);
+      setCustomSubmit(false);
+    } else {
+      setCustomGenre(false);
+    }
   };
 
   return (
@@ -22,7 +42,7 @@ export default Genre;
 
 const Container = styled.button`
   margin: 0 10px;
-  width: 260px;
+  width: 240px;
   height: 600px;
   cursor: pointer;
   border: 1px var(--guessBox) solid;
@@ -64,7 +84,7 @@ const Container = styled.button`
   }
 
   @media (max-width: 1600px) {
-    width: 200px;
+    width: 180px;
     height: 500px;
   }
 `;

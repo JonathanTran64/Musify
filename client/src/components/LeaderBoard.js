@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import goldIcon from "../assets/goldIcon.png";
 import silverIcon from "../assets/silverIcon.png";
 import bronzeIcon from "../assets/bronzeIcon.png";
+import { SongContext } from "../context/SongContext";
 
 const LeaderBoard = ({ genre }) => {
   const [top10, setTop10] = useState([]);
+  const { customGenre } = useContext(SongContext);
 
   useEffect(() => {
     const getTop10 = async () => {
@@ -19,53 +21,59 @@ const LeaderBoard = ({ genre }) => {
   }, []);
 
   return (
-    <Container>
-      <h2>LEADER BOARD - {genre === "hiphop" ? "HIP-HOP" : genre}</h2>
+    <Container $display={customGenre ? "none" : "block"}>
+      <h2>
+        LEADER BOARD -{" "}
+        {genre === "hiphop" ? "HIP-HOP" : genre === "rnb" ? "R&B" : genre}
+      </h2>
       <FlexHeaders>
         <h3>RANK</h3>
         <h3>USERNAME</h3>
         <h3>SCORE</h3>
       </FlexHeaders>
-      {top10.map((obj, i) => {
-        return (
-          <FlexUser
-            key={obj.username}
-            $color={
-              i === 0
-                ? "#ffc300"
-                : i === 1
-                ? "#e5e5e5"
-                : i === 2
-                ? "#ffba9e"
-                : "lightgray"
-            }
-          >
-            {i < 3 ? (
-              <MedalImage
-                src={
+      {top10.length !== 0
+        ? top10.map((obj, i) => {
+            return (
+              <FlexUser
+                key={obj.username}
+                $color={
                   i === 0
-                    ? goldIcon
+                    ? "#ffc300"
                     : i === 1
-                    ? silverIcon
+                    ? "#e5e5e5"
                     : i === 2
-                    ? bronzeIcon
-                    : null
+                    ? "#ffba9e"
+                    : "lightgray"
                 }
-                alt="goldIcon"
-              />
-            ) : (
-              <RankNumber> {i + 1}</RankNumber>
-            )}
-            <p>{obj.username}</p>
-            <p>{obj.bestStreak}</p>
-          </FlexUser>
-        );
-      })}
+              >
+                {i < 3 ? (
+                  <MedalImage
+                    src={
+                      i === 0
+                        ? goldIcon
+                        : i === 1
+                        ? silverIcon
+                        : i === 2
+                        ? bronzeIcon
+                        : null
+                    }
+                    alt="goldIcon"
+                  />
+                ) : (
+                  <RankNumber> {i + 1}</RankNumber>
+                )}
+                <p>{obj.username}</p>
+                <p>{obj.bestStreak}</p>
+              </FlexUser>
+            );
+          })
+        : null}
     </Container>
   );
 };
 
 const Container = styled.div`
+  display: ${(props) => props.$display};
   position: absolute;
   top: 90px;
   right: 70px;

@@ -14,6 +14,7 @@ import NavBar from "../components/NavBar";
 import Streak from "../components/Streak";
 import Footer from "../components/Footer";
 import LeaderBoard from "../components/LeaderBoard";
+import CustomBox from "../components/CustomBox";
 
 const SongGame = () => {
   // number of seconds allowed to play
@@ -36,16 +37,26 @@ const SongGame = () => {
   // audio player ref
   const audioRef = useRef(null);
 
-  const { song, setSong, tries, setTries } = useContext(SongContext);
+  const {
+    song,
+    setSong,
+    tries,
+    setTries,
+    customGenre,
+    customPlaylist,
+    playlist,
+  } = useContext(SongContext);
 
   // fetch the random song/songs from the chosen genre
   useEffect(() => {
     const getSong = async () => {
       try {
+        if (genre === "CUSTOM") {
+          return;
+        }
         const response = await axios.get(
           `https://musifybackend.onrender.com/${genre}`
         );
-        //
         const { song, songsArray } = await response.data;
         setSong(song);
         setAllSongs(songsArray);
@@ -60,9 +71,34 @@ const SongGame = () => {
     getSong();
   }, []);
 
+  // Post Custom Playlist
+  useEffect(() => {
+    const getCustom = async () => {
+      try {
+        if (customPlaylist) {
+          const response = await axios.post(
+            `https://musifybackend.onrender.com/custom`,
+            {
+              playlists: playlist,
+            }
+          );
+          const { song, songsArray } = await response.data;
+          setSong(song);
+          setAllSongs(songsArray);
+          setFirstLoad(false);
+          // Set Volume
+          audioRef.current.volume = 0.15;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCustom();
+  }, [customPlaylist]);
+
   // First time loading
   useEffect(() => {
-    if (!song) {
+    if (!song && !customGenre) {
       setTimeout(() => {
         setFirstLoad(true);
       }, 5000);
@@ -105,7 +141,12 @@ const SongGame = () => {
     <>
       <NavBar genre={genre} />
       <Container>
-        <Streak genre={genre === "HIP-HOP" ? "hiphop" : genre} />
+        <CustomBox />
+        <Streak
+          genre={
+            genre === "HIP-HOP" ? "hiphop" : genre === "R&B" ? "rnb" : genre
+          }
+        />
         <GuessBoxWrapper>
           {/* GUESS BOXES */}
           {tries.map((tryAnswer, index) => (
@@ -116,7 +157,11 @@ const SongGame = () => {
             />
           ))}
         </GuessBoxWrapper>
-        <LeaderBoard genre={genre === "HIP-HOP" ? "hiphop" : genre} />
+        <LeaderBoard
+          genre={
+            genre === "HIP-HOP" ? "hiphop" : genre === "R&B" ? "rnb" : genre
+          }
+        />
         {song ? (
           <>
             <audio ref={audioRef} src={song.preview} />

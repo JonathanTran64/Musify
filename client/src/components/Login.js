@@ -39,6 +39,7 @@ const Login = () => {
       const { data } = await axios.post("/login", { email, password });
       if (data.error) {
         toast.error(data.error);
+        setLoading(false);
       } else {
         toast.success("Login Successful. Welcome to MUSIFY! ");
         setUser({ email: data.email, id: data._id, username: data.username });
@@ -65,6 +66,7 @@ const Login = () => {
 
       if (data.error) {
         toast.error(data.error);
+        setLoading(false);
       } else {
         setData({ ...data, username: "", password: "", email: "" });
         toast.success("Register Successful. Please log in.");

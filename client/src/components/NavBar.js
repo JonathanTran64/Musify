@@ -46,7 +46,6 @@ const NavBar = ({ genre }) => {
   return (
     <>
       <Dark
-        id="yourDivId"
         onClick={() => {
           setDarkDisplay(false);
           setDisplayRL(false);
@@ -133,7 +132,7 @@ const Dark = styled.div`
   height: 100vh;
   opacity: 0.5;
   background-color: black;
-  z-index: 99;
+  z-index: 3;
 `;
 
 const Container = styled.div`

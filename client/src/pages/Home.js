@@ -9,6 +9,7 @@ import hiphopImage from "../assets/hip-hop.png";
 import countryImage from "../assets/country.png";
 import rnbImage from "../assets/rnb.png";
 import rockImage from "../assets/rock.png";
+import spotifyImage from "../assets/spotifyGenre.png";
 import arrowDownImage from "../assets/arrowDown.png";
 import Footer from "../components/Footer";
 
@@ -20,6 +21,7 @@ const Home = () => {
     { genre: "COUNTRY", image: countryImage },
     { genre: "R&B", image: rnbImage },
     { genre: "ROCK", image: rockImage },
+    { genre: "CUSTOM", image: spotifyImage },
   ];
   return (
     <Wrapper>

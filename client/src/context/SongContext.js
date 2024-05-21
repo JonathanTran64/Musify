@@ -7,13 +7,39 @@ const SongProvider = ({ children }) => {
 
   // each try will have their answer match their index
   const [tries, setTries] = useState(["", "", "", "", "", ""]);
+  const [customGenre, setCustomGenre] = useState(false);
+
+  const [customSubmit, setCustomSubmit] = useState(false);
+
+  const [customPlaylist, setCustomPlaylist] = useState(false);
+
+  const [playlist, setPlaylist] = useState({
+    playlist1: "",
+    playlist2: "",
+    playlist3: "",
+  });
 
   useEffect(() => {
     setTries(["", "", "", "", "", ""]);
   }, [song]);
 
   return (
-    <SongContext.Provider value={{ song, setSong, tries, setTries }}>
+    <SongContext.Provider
+      value={{
+        song,
+        setSong,
+        tries,
+        setTries,
+        customGenre,
+        setCustomGenre,
+        playlist,
+        setPlaylist,
+        customPlaylist,
+        setCustomPlaylist,
+        customSubmit,
+        setCustomSubmit,
+      }}
+    >
       {children}
     </SongContext.Provider>
   );

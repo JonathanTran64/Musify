@@ -1,8 +1,9 @@
 import styled from "styled-components";
-
+// components
 import Genre from "../components/Genre";
 import NavBar from "../components/NavBar";
-
+import Footer from "../components/Footer";
+// images
 import kpopImage from "../assets/kpop.png";
 import popImage from "../assets/pop.png";
 import hiphopImage from "../assets/hip-hop.png";
@@ -11,7 +12,6 @@ import rnbImage from "../assets/rnb.png";
 import rockImage from "../assets/rock.png";
 import spotifyImage from "../assets/spotifyGenre.png";
 import arrowDownImage from "../assets/arrowDown.png";
-import Footer from "../components/Footer";
 
 const Home = () => {
   const genres = [

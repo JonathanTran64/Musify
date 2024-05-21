@@ -1,15 +1,18 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+//images
 import goldIcon from "../assets/goldIcon.png";
 import silverIcon from "../assets/silverIcon.png";
 import bronzeIcon from "../assets/bronzeIcon.png";
+// context
 import { SongContext } from "../context/SongContext";
 
 const LeaderBoard = ({ genre }) => {
   const [top10, setTop10] = useState([]);
   const { customGenre } = useContext(SongContext);
 
+  // GET the top 10 best user's streaks in genre param
   useEffect(() => {
     const getTop10 = async () => {
       const response = await axios.get(`/top10streaks/${genre}`);

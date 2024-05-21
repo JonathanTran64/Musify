@@ -27,7 +27,7 @@ const SongGame = () => {
   const [suggestions, setSuggestion] = useState([]);
   // checking if audio is playing
   const [isPlaying, setIsPlaying] = useState(false);
-
+  // flag for when server has to launch / no one has been on for a while
   const [firstLoad, setFirstLoad] = useState(false);
   // count number of tries
   let [count, setCount] = useState(0);

@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// context
 import { SongContext } from "../context/SongContext";
-import { UserContext } from "../context/UserContext";
+
 const Genre = ({ genre, image }) => {
   const {
     setSong,

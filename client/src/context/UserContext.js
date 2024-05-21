@@ -4,19 +4,22 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
+  // user info
   const [user, setUser] = useState(null);
+  // fullscreen background dark for how to play and login
   const [darkDisplay, setDarkDisplay] = useState(false);
+  // display the login / register block
   const [displayRL, setDisplayRL] = useState(false);
+  // click on profile on nav when not logged in
   const [firstClick, setFirstClick] = useState(false);
+  // display drop down if user logged in
   const [dropDownDisplay, setDropDownDisplay] = useState(false);
-  const [gameOver, setGameOver] = useState([false, false]);
 
+  // gets profile of user based on given token
   useEffect(() => {
-    if (!user) {
-      axios.get("/profile").then(({ data }) => {
-        setUser(data);
-      });
-    }
+    axios.get("/profile").then(({ data }) => {
+      setUser(data);
+    });
   }, []);
 
   return (
@@ -32,9 +35,8 @@ const UserProvider = ({ children }) => {
         setFirstClick,
         dropDownDisplay,
         setDropDownDisplay,
-        gameOver,
-        setGameOver,
-      }}>
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

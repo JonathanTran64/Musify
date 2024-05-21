@@ -1,5 +1,8 @@
-import { useContext, useState } from "react";
+// package
 import styled from "styled-components";
+
+// context
+import { useContext } from "react";
 import { SongContext } from "../context/SongContext";
 
 const CustomBox = () => {
@@ -12,6 +15,7 @@ const CustomBox = () => {
     setCustomSubmit,
   } = useContext(SongContext);
 
+  //   Click Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     setCustomPlaylist(true);

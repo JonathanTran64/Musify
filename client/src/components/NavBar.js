@@ -18,10 +18,8 @@ const NavBar = ({ genre }) => {
   const {
     darkDisplay,
     setDarkDisplay,
-    displayRL,
     setDisplayRL,
     user,
-    setUser,
     setFirstClick,
     dropDownDisplay,
     setDropDownDisplay,

@@ -1,13 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import styled from "styled-components";
-import { UserContext } from "../context/UserContext";
 import axios from "axios";
+// images
 import spotify from "../assets/spotify.png";
 import trashcanIcon from "../assets/trashcan.png";
 import loadingGif from "../assets/loading.gif";
-import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
+//component
+import NavBar from "./NavBar";
+// context
+import { UserContext } from "../context/UserContext";
 
 const Favorite = () => {
   const [favoritesArray, setFavoritesArray] = useState([]);

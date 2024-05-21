@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import githubIcon from "../assets/githubIcon.png";
 import { Link } from "react-router-dom";
+//images
+import githubIcon from "../assets/githubIcon.png";
 
 const Footer = () => {
   return (

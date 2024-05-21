@@ -18,7 +18,6 @@ import styled from "styled-components";
 import axios from "axios";
 import Footer from "../components/Footer";
 import LeaderBoard from "../components/LeaderBoard";
-import Streak from "../components/Streak";
 
 const Answer = () => {
   // track is playing state
@@ -33,13 +32,14 @@ const Answer = () => {
   const { song, setSong, tries, setTries } = useContext(SongContext);
   // user info
   const { user } = useContext(UserContext);
-
+  // genre param
   const { genre } = useParams();
 
   const navigate = useNavigate();
   // audio player ref
   const audioAnswerRef = useRef(null);
 
+  // answer with 'Artist - Song' format
   const answer = `${song.artistName} - ${song.songName}`;
 
   // Click New Game button

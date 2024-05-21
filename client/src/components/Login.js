@@ -1,10 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import styled from "styled-components";
-import { UserContext } from "../context/UserContext";
+import axios from "axios";
+// images
 import xIconGrey from "../assets/xIconGrey.png";
 import loadingGif from "../assets/loading.gif";
+// context
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   // user's input

@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
-import Favorite from "./Favorite";
+import { useNavigate } from "react-router-dom";
+
+// context
+import { UserContext } from "../context/UserContext";
 
 const ProfileDropDown = () => {
-  const { dropDownDisplay, setDropDownDisplay, user, setUser } =
+  const { dropDownDisplay, setDropDownDisplay, setUser } =
     useContext(UserContext);
 
   const navigate = useNavigate();

@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+// images
 import crownIcon from "../assets/crownIcon.png";
 import fireIcon from "../assets/fireIcon.png";
-import { useContext, useEffect, useState } from "react";
+// context
 import { UserContext } from "../context/UserContext";
-import axios from "axios";
 
 const Streak = ({ genre }) => {
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -12,6 +14,7 @@ const Streak = ({ genre }) => {
 
   const { user } = useContext(UserContext);
 
+  // GET streaks of user in specific genre
   useEffect(() => {
     const getStreaks = async () => {
       if (user) {
@@ -31,6 +34,7 @@ const Streak = ({ genre }) => {
     };
     getStreaks();
   }, [user]);
+
   return (
     <Container $display={user ? "block" : "none"}>
       <FlexHeader>

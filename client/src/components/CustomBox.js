@@ -79,7 +79,7 @@ const Container = styled.div`
   height: 450px;
   background: linear-gradient(
     to bottom,
-    rgba(100, 150, 100, 1),
+    rgba(100, 180, 100, 1),
     rgba(100, 100, 100, 1)
   );
 
@@ -112,7 +112,7 @@ const Form = styled.form`
   button {
     border: none;
     border-radius: 3px;
-    background-color: rgba(100, 150, 100, 1);
+    background-color: rgba(100, 190, 100, 1);
     cursor: pointer;
     color: var(--background);
     font-weight: bold;

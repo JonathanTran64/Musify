@@ -89,12 +89,12 @@ const getKpop = async (req, res) => {
 // POP
 const getPop = async (req, res) => {
   const popArrayIds = [
-    "6mtYuOxzl58vSGnEDtZ9uB",
-    "1WH6WVBwPBz35ZbWsgCpgr",
     "37i9dQZF1DWXT8uSSn6PRy",
-    "1Cgey68pUlQGsCPI2wJuxr",
-    "2xutOn4Ea4RyjuaRaD3jl3",
-    "2eVuLoCP74cegyax11zgEf",
+    "37i9dQZF1DX7LjobXS2hzX",
+    "37i9dQZF1DXcOFePJj4Rgb",
+    "37i9dQZF1DX2L0iB23Enbq",
+    "1WH6WVBwPBz35ZbWsgCpgr",
+    "5nYj43JXdyVx0yAtY5OVFP",
   ];
 
   try {

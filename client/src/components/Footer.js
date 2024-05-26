@@ -21,11 +21,6 @@ const Footer = () => {
 const Wrapper = styled.div`
   position: relative;
   top: 115px;
-
-  @media (max-width: 1650px) {
-    position: absolute;
-    margin-top: 40px;
-  }
 `;
 
 const Container = styled.footer`

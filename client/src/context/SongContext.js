@@ -16,6 +16,9 @@ const SongProvider = ({ children }) => {
   // flag for song game to use POST custom
   const [customPlaylist, setCustomPlaylist] = useState(false);
 
+  // adjust volume of the song
+  const [volume, setVolume] = useState(0.15);
+
   // user's customs playlists
   const [playlist, setPlaylist] = useState({
     playlist1: "",
@@ -42,8 +45,9 @@ const SongProvider = ({ children }) => {
         setCustomPlaylist,
         customSubmit,
         setCustomSubmit,
-      }}
-    >
+        volume,
+        setVolume,
+      }}>
       {children}
     </SongContext.Provider>
   );

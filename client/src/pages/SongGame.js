@@ -4,6 +4,9 @@ import styled from "styled-components";
 import FuzzySearch from "fuzzy-search";
 import axios from "axios";
 
+//images
+import volumeIcon from "../assets/volumeIcon.png";
+
 // components
 import GuessBox from "../components/GuessBox";
 import SongProgressBar from "../components/SongProgessBar";
@@ -45,6 +48,8 @@ const SongGame = () => {
     customGenre,
     customPlaylist,
     playlist,
+    volume,
+    setVolume,
   } = useContext(SongContext);
 
   // fetch the random song/songs from the chosen genre
@@ -62,7 +67,7 @@ const SongGame = () => {
         setAllSongs(songsArray);
         setFirstLoad(false);
         // Set Volume
-        audioRef.current.volume = 0.15;
+        audioRef.current.volume = volume;
       } catch (error) {
         console.log(error);
       }
@@ -87,7 +92,7 @@ const SongGame = () => {
           setAllSongs(songsArray);
           setFirstLoad(false);
           // Set Volume
-          audioRef.current.volume = 0.15;
+          audioRef.current.volume = volume;
         }
       } catch (error) {
         console.log(error);
@@ -137,6 +142,14 @@ const SongGame = () => {
     };
   }, [seconds, song]);
 
+  const handleVolumeChange = (event) => {
+    const newVolume = event.target.value;
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
   return (
     <>
       <NavBar genre={genre} />
@@ -176,8 +189,7 @@ const SongGame = () => {
                             <ButtonSuggestions
                               onClick={() => {
                                 setInputGuess(song + " ");
-                              }}
-                            >
+                              }}>
                               {song}
                             </ButtonSuggestions>
                           </div>
@@ -210,6 +222,21 @@ const SongGame = () => {
               setInputGuess={setInputGuess}
               setCount={setCount}
             />
+            <SliderContainer>
+              <Slider>
+                <img src={volumeIcon} alt="volumeIcon" />
+                <VolumeSlider
+                  type="range"
+                  id="volumeSlider"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                />
+              </Slider>
+            </SliderContainer>
+            <Footer />
           </>
         ) : (
           <>
@@ -220,7 +247,6 @@ const SongGame = () => {
             <Loading>Loading player...</Loading>
           </>
         )}
-        <Footer />
       </Container>
     </>
   );
@@ -287,5 +313,50 @@ const FirstLoad = styled.h3`
   color: var(--submit);
   margin-bottom: 20px;
   display: ${(props) => props.$display};
+`;
+
+const SliderContainer = styled.div`
+  width: 100%;
+`;
+
+const Slider = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+  bottom: 35px;
+
+  img {
+    width: 30px;
+    margin-right: 10px;
+  }
+`;
+
+const VolumeSlider = styled.input`
+  width: 300px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: var(--notSeconds);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 10px;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #ccff33;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
 `;
 export default SongGame;

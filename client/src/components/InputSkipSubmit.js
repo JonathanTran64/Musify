@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 // images
 import searchIconWhiteImage from "../assets/searchiconwhite.png";
+import xIcon from "../assets/xIconWhite.png";
 
 const InputSkipSubmit = ({
   song,
@@ -68,7 +69,6 @@ const InputSkipSubmit = ({
       document.removeEventListener("keydown", handleEnter);
     };
   }, [handleSubmit]);
-
   return (
     <div>
       {/* GUESS INPUT */}
@@ -83,6 +83,12 @@ const InputSkipSubmit = ({
               setInputGuess(e.target.value);
             }}
           />
+          <XButton
+            onClick={() => {
+              setInputGuess("");
+            }}>
+            <img src={xIcon} alt="xIcon" />
+          </XButton>
         </InputWrapper>
 
         {/* SKIP BUTTON */}
@@ -121,6 +127,7 @@ const SearchIcon = styled.img`
   top: 18px;
   left: 10px;
 `;
+
 const InputGuess = styled.input`
   width: 658px;
   height: 40px;
@@ -131,6 +138,19 @@ const InputGuess = styled.input`
 
   &::placeholder {
     color: var(--skip);
+  }
+`;
+
+const XButton = styled.button`
+  position: absolute;
+  left: 640px;
+  top: 13px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  img {
+    width: 25px;
   }
 `;
 

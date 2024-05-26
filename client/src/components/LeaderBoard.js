@@ -47,8 +47,7 @@ const LeaderBoard = ({ genre }) => {
                     : i === 2
                     ? "#ffba9e"
                     : "lightgray"
-                }
-              >
+                }>
                 {i < 3 ? (
                   <MedalImage
                     src={
@@ -94,7 +93,7 @@ const Container = styled.div`
   }
 
   @media (max-width: 1650px) {
-    right: 50px;
+    right: 15px;
     width: 350px;
   }
 

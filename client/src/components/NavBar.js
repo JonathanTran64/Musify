@@ -37,8 +37,6 @@ const NavBar = ({ genre }) => {
     } else if (user && !dropDownDisplay) {
       setDropDownDisplay(true);
     }
-
-    console.log(user, "nav");
   };
 
   return (
@@ -49,16 +47,14 @@ const NavBar = ({ genre }) => {
           setDisplayRL(false);
           setDisplayHTP(false);
         }}
-        $display={darkDisplay ? "block" : "none"}
-      ></Dark>
+        $display={darkDisplay ? "block" : "none"}></Dark>
       <Container>
         <FlexBox>
           <HowToPlayButton
             onClick={() => {
               setDarkDisplay(true);
               setDisplayHTP(true);
-            }}
-          >
+            }}>
             <img src={questionMarkIcon} alt="questionMark" />
           </HowToPlayButton>
           <Link to={"/"}>
@@ -85,8 +81,7 @@ const NavBar = ({ genre }) => {
                 onClick={() => {
                   setDisplayHTP(false);
                   setDarkDisplay(false);
-                }}
-              >
+                }}>
                 <img src={xIconGrey} alt="xIconGrey"></img>
               </button>
             </HeaderXFlex>
@@ -111,8 +106,7 @@ const NavBar = ({ genre }) => {
               onClick={() => {
                 setDisplayHTP(false);
                 setDarkDisplay(false);
-              }}
-            >
+              }}>
               P L A Y
             </CloseButton>
           </HowToPlayFlex>

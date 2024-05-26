@@ -30,7 +30,7 @@ The navigation bar provides intuitive access to various features of MUSIFY:
 
 ![image](https://github.com/JonathanTran64/Final-Project/assets/146039922/95f3104e-72d5-413c-9dca-78f8b213a53e)
 
-![image](https://github.com/JonathanTran64/Final-Project/assets/146039922/80437bf8-d4b6-42b7-adbc-bed306a70a21)
+![image](https://github.com/JonathanTran64/Final-Project/assets/146039922/4a59dc23-dd92-4297-bf2a-4da0e2290b02)
 
 ## Song Guessing Game
 

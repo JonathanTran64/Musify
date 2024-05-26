@@ -19,8 +19,8 @@ const Footer = () => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
-  top: 115px;
+  position: absolute;
+  margin-top: 40px;
 `;
 
 const Container = styled.footer`

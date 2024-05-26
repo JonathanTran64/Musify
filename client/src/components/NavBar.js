@@ -125,6 +125,10 @@ const Dark = styled.div`
   opacity: 0.5;
   background-color: black;
   z-index: 3;
+
+  @media (max-width: 1650px) {
+    height: 120%;
+  }
 `;
 
 const Container = styled.div`

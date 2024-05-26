@@ -59,6 +59,10 @@ const WelcomeWrapper = styled.div`
   h1 {
     margin: 0;
     font-size: 60px;
+
+    @media (max-width: 1650px) {
+      font-size: 50px;
+    }
   }
 
   img {

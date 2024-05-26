@@ -97,14 +97,12 @@ const Login = () => {
   return (
     <Wrapper
       $display={displayRL ? "block" : "none"}
-      $slide={displayRL ? "slideRL" : "none"}
-    >
+      $slide={displayRL ? "slideRL" : "none"}>
       <Container>
         <XButton
           onClick={() => {
             setDarkDisplay(false), setDisplayRL(false);
-          }}
-        >
+          }}>
           <img src={xIconGrey} alt="xIconGrey" />
         </XButton>
         <ButtonsFlex>
@@ -154,7 +152,7 @@ const Login = () => {
                 required
               />
               {loading ? (
-                <img src={loadingGif} alt="loadingGif" />
+                <Loading src={loadingGif} alt="loadingGif" />
               ) : (
                 <SubmitButton type="submit">Register</SubmitButton>
               )}
@@ -164,8 +162,7 @@ const Login = () => {
           <DisplayForm $display={displayLogIn ? "block" : "none"}>
             <Form
               onSubmit={handleLogin}
-              $display={displayLogIn ? "block" : "none"}
-            >
+              $display={displayLogIn ? "block" : "none"}>
               <label htmlFor="email">E M A I L</label>
               <input
                 id="email"
@@ -186,7 +183,7 @@ const Login = () => {
               />
 
               {loading ? (
-                <img src={loadingGif} alt="loadingGif" />
+                <Loading src={loadingGif} alt="loadingGif" />
               ) : (
                 <SubmitButton type="submit">Login</SubmitButton>
               )}
@@ -336,5 +333,9 @@ const SubmitButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`;
+
+const Loading = styled.img`
+  margin-top: 20px;
 `;
 export default Login;

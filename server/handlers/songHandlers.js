@@ -230,7 +230,6 @@ const postCustom = async (req, res) => {
 
   try {
     const { playlists } = req.body;
-    console.log(playlists);
 
     const extractedPlaylists = [];
 
@@ -246,8 +245,6 @@ const postCustom = async (req, res) => {
         }
       }
     }
-
-    console.log(extractedPlaylists);
 
     const { song, songsArray } = await getSong(req, res, extractedPlaylists);
     if (song) {

@@ -12,8 +12,16 @@ import rnbImage from "../assets/rnb.png";
 import rockImage from "../assets/rock.png";
 import spotifyImage from "../assets/spotifyGenre.png";
 import arrowDownImage from "../assets/arrowDown.png";
+import { useContext, useEffect } from "react";
+import { SongContext } from "../context/SongContext";
 
 const Home = () => {
+  const { setCustomPlaylist } = useContext(SongContext);
+
+  useEffect(() => {
+    setCustomPlaylist(false);
+  }, []);
+
   const genres = [
     { genre: "KPOP", image: kpopImage },
     { genre: "POP", image: popImage },

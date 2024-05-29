@@ -18,7 +18,6 @@ const LeaderBoard = ({ genre }) => {
       const response = await axios.get(`/top10streaks/${genre}`);
       const { top10UsersData } = await response.data;
       setTop10(top10UsersData);
-      console.log(top10UsersData);
     };
     getTop10();
   }, []);
@@ -47,7 +46,8 @@ const LeaderBoard = ({ genre }) => {
                     : i === 2
                     ? "#ffba9e"
                     : "lightgray"
-                }>
+                }
+              >
                 {i < 3 ? (
                   <MedalImage
                     src={

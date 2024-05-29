@@ -189,7 +189,8 @@ const SongGame = () => {
                             <ButtonSuggestions
                               onClick={() => {
                                 setInputGuess(song + " ");
-                              }}>
+                              }}
+                            >
                               {song}
                             </ButtonSuggestions>
                           </div>
@@ -242,7 +243,7 @@ const SongGame = () => {
           <>
             <FirstLoad $display={firstLoad ? "block" : "none"}>
               If this is your first time loading please wait around a minute
-              while we fetch the tracks. Thank you and enjoy MUSIFY!
+              while we start the server. Thank you and enjoy MUSIFY!
             </FirstLoad>
             <Loading>Loading player...</Loading>
           </>

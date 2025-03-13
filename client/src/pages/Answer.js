@@ -142,8 +142,7 @@ const Answer = () => {
         <HeartContainer>
           <HeartWrapper
             onClick={handleFavorite}
-            $animate={animateHeart ? "heart 0.3s ease-out" : "none"}
-          >
+            $animate={animateHeart ? "heart 0.3s ease-out" : "none"}>
             {!favorites ? (
               <img src={heartWhiteIcon} alt="heartWhite" />
             ) : (
@@ -193,8 +192,7 @@ const Answer = () => {
                       : string === ""
                       ? "white"
                       : "#bc4749"
-                  }
-                ></Tries>
+                  }></Tries>
               );
             })}
           </FlexTries>
@@ -356,7 +354,7 @@ const NewGame = styled.button`
   border-radius: 3px;
   background-color: var(--submit);
   cursor: pointer;
-  color: var(--background);
+  color: var(--seconds);
   font-weight: bold;
   transition: opacity 0.1s;
   width: 140px;

@@ -353,7 +353,7 @@ const VolumeSlider = styled.input`
     appearance: none;
     width: 25px;
     height: 25px;
-    background: #ccff33;
+    background: var(--submit);
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

@@ -16,9 +16,11 @@ const getSong = async (req, res, playlist) => {
 
     let chosenSong;
 
-    for (let i = 0; i < data.length; i++) {
+    while (!chosenSong) {
       const song = data[Math.floor(Math.random() * data.length)];
-      chosenSong = song;
+      if (song.preview) {
+        chosenSong = song;
+      }
     }
 
     const artistName = chosenSong.artist.name;

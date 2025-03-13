@@ -1,38 +1,32 @@
+require("dotenv").config();
 const fetch = require("node-fetch");
-const { getAccessToken } = require("../handlers/spotifyToken");
 
 // Fetch a playlist with give playlist Id
 const getSong = async (req, res, playlist) => {
   try {
-    const accessToken = await getAccessToken();
+    // const accessToken = await getAccessToken();
     const playlistID = playlist[Math.floor(Math.random() * playlist.length)];
 
     const response = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
+      `https://api.deezer.com/playlist/908622995/tracks`
     );
 
-    const data = await response.json();
-    const { items } = data;
+    const items = await response.json();
+
+    const { data } = items;
 
     let chosenSong;
-    for (let i = 0; i < items.length; i++) {
-      const song = items[Math.floor(Math.random() * items.length)];
-      if (song.track.preview_url !== null) {
-        chosenSong = song;
-      }
+
+    for (let i = 0; i < data.length; i++) {
+      const song = data[Math.floor(Math.random() * data.length)];
+      chosenSong = song;
     }
 
-    const artistName = chosenSong.track.artists[0].name;
-    const songName = chosenSong.track.name;
-    const preview = chosenSong.track.preview_url;
-    const albumCover = chosenSong.track.album.images[2].url;
-    const spotifyLink = chosenSong.track.external_urls.spotify;
+    const artistName = chosenSong.artist.name;
+    const songName = chosenSong.title_short;
+    const preview = chosenSong.preview;
+    const albumCover = chosenSong.album.cover_medium;
+    const spotifyLink = chosenSong.link;
 
     const info = {
       artistName: artistName,
@@ -42,11 +36,13 @@ const getSong = async (req, res, playlist) => {
       spotifyLink: spotifyLink,
     };
 
+    console.log(info);
+
     // Get all songs in a artist - song format
     let songsArray = [];
-    for (const object of items) {
-      const artistName = object.track.artists[0].name;
-      const songName = object.track.name;
+    for (const object of data) {
+      const artistName = object.artist.name;
+      const songName = object.title_short;
       songsArray.push(`${artistName} - ${songName}`);
     }
 
@@ -85,6 +81,13 @@ const getKpop = async (req, res) => {
     });
   }
 };
+
+// getKpop(
+//   {},
+//   {
+//     status: (code) => ({ json: (data) => console.log(code, data) }),
+//   }
+// );
 
 // POP
 const getPop = async (req, res) => {

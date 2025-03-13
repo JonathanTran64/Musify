@@ -19,6 +19,8 @@ const getSong = async (req, res, playlist) => {
     let chosenSong;
 
     while (!chosenSong) {
+      const song = data[Math.floor(Math.random() * data.length)];
+
       if (song.preview && !recentSongsQueue.includes(song.id)) {
         chosenSong = song;
 

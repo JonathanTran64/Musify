@@ -87,6 +87,7 @@ const Container = styled.div`
   text-align: center;
   border-radius: 3px;
   animation: customSlide 0.6s ease-out;
+  color: var(--seconds);
 
   @keyframes customSlide {
     from {
@@ -112,9 +113,9 @@ const Form = styled.form`
   button {
     border: none;
     border-radius: 3px;
-    background-color: rgba(100, 190, 100, 1);
+    background-color: var(--submit);
     cursor: pointer;
-    color: var(--background);
+    color: var(--seconds);
     font-weight: bold;
     transition: opacity 0.1s;
     width: 160px;

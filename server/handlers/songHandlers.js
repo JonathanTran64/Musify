@@ -4,11 +4,10 @@ const fetch = require("node-fetch");
 // Fetch a playlist with give playlist Id
 const getSong = async (req, res, playlist) => {
   try {
-    // const accessToken = await getAccessToken();
     const playlistID = playlist[Math.floor(Math.random() * playlist.length)];
 
     const response = await fetch(
-      `https://api.deezer.com/playlist/908622995/tracks`
+      `https://api.deezer.com/playlist/${playlistID}/tracks`
     );
 
     const items = await response.json();
@@ -36,8 +35,6 @@ const getSong = async (req, res, playlist) => {
       spotifyLink: spotifyLink,
     };
 
-    console.log(info);
-
     // Get all songs in a artist - song format
     let songsArray = [];
     for (const object of data) {
@@ -54,13 +51,7 @@ const getSong = async (req, res, playlist) => {
 
 // KPOP
 const getKpop = async (req, res) => {
-  const kpopArrayIds = [
-    "37i9dQZF1DX9tPFwDMOaN1",
-    "3Ir5YWemOTGRRfXgROrsDV",
-    "3RoWb8YSy3vFVOYNaNWtIp",
-    "61HtPhUmp6qNVaAq8wcOQs",
-    "7DmYmaINse2wok7HB4MxLI",
-  ];
+  const kpopArrayIds = ["4096400722", "12087463111"];
 
   try {
     const { song, songsArray } = await getSong(req, res, kpopArrayIds);
@@ -82,23 +73,9 @@ const getKpop = async (req, res) => {
   }
 };
 
-// getKpop(
-//   {},
-//   {
-//     status: (code) => ({ json: (data) => console.log(code, data) }),
-//   }
-// );
-
 // POP
 const getPop = async (req, res) => {
-  const popArrayIds = [
-    "37i9dQZF1DWXT8uSSn6PRy",
-    "37i9dQZF1DX7LjobXS2hzX",
-    "37i9dQZF1DXcOFePJj4Rgb",
-    "37i9dQZF1DX2L0iB23Enbq",
-    "1WH6WVBwPBz35ZbWsgCpgr",
-    "5nYj43JXdyVx0yAtY5OVFP",
-  ];
+  const popArrayIds = ["1282495565", "1386209585", "4403076402"];
 
   try {
     const { song, songsArray } = await getSong(req, res, popArrayIds);
@@ -121,12 +98,7 @@ const getPop = async (req, res) => {
 
 // HIP-HOP
 const getHipHop = async (req, res) => {
-  const hiphopArrayIds = [
-    "0dMexqq0XIWS3QJ74z3ZhD",
-    "5TZkls9cEOzWDR6qCxwDot",
-    "37i9dQZF1EQnqst5TRi17F",
-    "37i9dQZF1DWT5MrZnPU1zD",
-  ];
+  const hiphopArrayIds = ["1862349026"];
 
   try {
     const { song, songsArray } = await getSong(req, res, hiphopArrayIds);
@@ -149,11 +121,7 @@ const getHipHop = async (req, res) => {
 
 // COUNTRY
 const getCountry = async (req, res) => {
-  const countryArrayIds = [
-    "4Jb4PDWREzNnbZcOHPcZPy",
-    "02t75h5hsNOw4VlC1Qad9Z",
-    "3FSvK3GkiECDMHeeIbbJIn",
-  ];
+  const countryArrayIds = ["1130102843", "1132251583"];
 
   try {
     const { song, songsArray } = await getSong(req, res, countryArrayIds);
@@ -176,11 +144,7 @@ const getCountry = async (req, res) => {
 
 // R&B
 const getRnB = async (req, res) => {
-  const rnbArrayIds = [
-    "5zCdhPJHI9kgYsgkSBEWT0",
-    "2T3BSpqN34Z4sppHDNWoeE",
-    "37i9dQZF1DX2WkIBRaChxW",
-  ];
+  const rnbArrayIds = ["7024537744"];
 
   try {
     const { song, songsArray } = await getSong(req, res, rnbArrayIds);
@@ -203,11 +167,7 @@ const getRnB = async (req, res) => {
 
 // ROCK
 const getRock = async (req, res) => {
-  const rockArrayIds = [
-    "1ti3v0lLrJ4KhSTuxt4loZ",
-    "0ImbTL9gm01nStEsaCmj16",
-    "37i9dQZF1EQpj7X7UK8OOF",
-  ];
+  const rockArrayIds = ["9076630322", "1578812305"];
 
   try {
     const { song, songsArray } = await getSong(req, res, rockArrayIds);

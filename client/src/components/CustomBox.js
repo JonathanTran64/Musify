@@ -28,14 +28,14 @@ const CustomBox = () => {
         <h2>Welcome to Custom Songs!</h2>
         <p>
           Add up to a maximum of 3 playlists of your choice to start playing!
-          (Spotify only){" "}
+          (Deezer only){" "}
         </p>
         <Form onSubmit={handleSubmit}>
           <label htmlFor="playlist">P L A Y L I S T S</label>
           <input
             id="playlist"
             type="text"
-            placeholder="Ex: https://open.spotify.com/playlist/5uKSo1wpu0jNocEpEU8a0v?si=c9bbc9c9077a48ce"
+            placeholder="Ex: deezer.com/en/playlist/3110429622"
             value={playlist.playlist1}
             onChange={(e) =>
               setPlaylist({ ...playlist, playlist1: e.target.value })
@@ -44,7 +44,7 @@ const CustomBox = () => {
           />
           <input
             type="text"
-            placeholder="Ex: https://open.spotify.com/playlist/5uKSo1wpu0jNocEpEU8a0v?si=c9bbc9c9077a48ce"
+            placeholder="Ex: deezer.com/en/playlist/3110429622"
             value={playlist.playlist2}
             onChange={(e) =>
               setPlaylist({ ...playlist, playlist2: e.target.value })
@@ -52,7 +52,7 @@ const CustomBox = () => {
           />
           <input
             type="text"
-            placeholder="Ex: https://open.spotify.com/playlist/5uKSo1wpu0jNocEpEU8a0v?si=c9bbc9c9077a48ce"
+            placeholder="Ex: deezer.com/en/playlist/3110429622"
             value={playlist.playlist3}
             onChange={(e) =>
               setPlaylist({ ...playlist, playlist3: e.target.value })
@@ -79,7 +79,7 @@ const Container = styled.div`
   height: 450px;
   background: linear-gradient(
     to bottom,
-    rgba(100, 180, 100, 1),
+    rgb(234, 56, 240),
     rgba(100, 100, 100, 1)
   );
 

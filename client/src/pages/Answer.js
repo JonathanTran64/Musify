@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 // images
-import spotifyIcon from "../assets/spotify.png";
+import deezerIcon from "../assets/deezer.png";
 import rightArrowIcon from "../assets/rightArrow.png";
 import heartWhiteIcon from "../assets/heartWhite.png";
 import heartRedIcon from "../assets/heartRed.png";
@@ -157,7 +157,7 @@ const Answer = () => {
                   <SongName>{song.songName}</SongName>
                   <ArtistName>{song.artistName}</ArtistName>
                 </NameArtistWrapper>
-                <Spotify src={spotifyIcon} alt="spotifyIcon" />
+                <Spotify src={deezerIcon} alt="deezerIcon" />
                 <RightArrow src={rightArrowIcon} />
               </SongInfo>
             </a>

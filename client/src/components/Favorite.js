@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import styled from "styled-components";
 import axios from "axios";
 // images
-import spotify from "../assets/spotify.png";
+import deezer from "../assets/deezer.png";
 import trashcanIcon from "../assets/trashcan.png";
 import loadingGif from "../assets/loading.gif";
 //component
@@ -74,7 +74,7 @@ const Favorite = () => {
                 />
                 <IconFlex>
                   <Link to={obj.spotifyLink} target="blank">
-                    <SpotifyIcon src={spotify} alt="spotifyIcon" />
+                    <SpotifyIcon src={deezer} alt="spotifyIcon" />
                   </Link>
                   <ButtonRemove onClick={() => removeFavorite(obj.preview)}>
                     {loading === obj.preview ? (

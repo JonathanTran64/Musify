@@ -1,6 +1,8 @@
 require("dotenv").config();
 const fetch = require("node-fetch");
 
+const recentSongsQueue = []; // Global queue to track recent picks
+
 // Fetch a playlist with give playlist Id
 const getSong = async (req, res, playlist) => {
   try {
@@ -17,9 +19,16 @@ const getSong = async (req, res, playlist) => {
     let chosenSong;
 
     while (!chosenSong) {
-      const song = data[Math.floor(Math.random() * data.length)];
-      if (song.preview) {
+      if (song.preview && !recentSongsQueue.includes(song.id)) {
         chosenSong = song;
+
+        // Add to queue
+        recentSongsQueue.push(song.id);
+
+        // Maintain queue size (only keep last 10 songs)
+        if (recentSongsQueue.length > 15) {
+          recentSongsQueue.shift(); // Remove the oldest song
+        }
       }
     }
 
@@ -200,13 +209,13 @@ const postCustom = async (req, res) => {
 
     for (const key in playlists) {
       if (Object.hasOwnProperty.call(playlists, key)) {
-        const playlistLink = playlists[key];
+        const playlistLink = playlists[key].trim();
 
-        // Check if the playlist link is empty
-        if (playlistLink.trim() !== "") {
-          const parts = playlistLink.split("/");
-          const playlistIdentifier = parts[3].split("?")[0];
-          extractedPlaylists.push(playlistIdentifier);
+        if (playlistLink !== "") {
+          const match = playlistLink.match(/\/(\d+)$/);
+          if (match) {
+            extractedPlaylists.push(match[1]); // Extracted playlist ID
+          }
         }
       }
     }

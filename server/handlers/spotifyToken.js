@@ -33,9 +33,9 @@ const getAccessToken = async () => {
         }
       });
     } else {
+      console.log(accessToken);
       resolve(accessToken);
     }
   });
 };
-
 module.exports = { getAccessToken };

@@ -189,8 +189,7 @@ const SongGame = () => {
                             <ButtonSuggestions
                               onClick={() => {
                                 setInputGuess(song + " ");
-                              }}
-                            >
+                              }}>
                               {song}
                             </ButtonSuggestions>
                           </div>

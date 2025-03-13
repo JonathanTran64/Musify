@@ -44,7 +44,7 @@ const CustomBox = () => {
           />
           <input
             type="text"
-            placeholder="Ex: https://www.deezer.com/en/album/273425942"
+            placeholder="Ex: deezer.com/en/playlist/3110429622"
             value={playlist.playlist2}
             onChange={(e) =>
               setPlaylist({ ...playlist, playlist2: e.target.value })

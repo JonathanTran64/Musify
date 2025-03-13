@@ -326,7 +326,7 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 3px;
   background-color: var(--submit);
-  color: var(--background);
+  color: var(--seconds);
   font-weight: bold;
   transition: opacity 0.1s;
 

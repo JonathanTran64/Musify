@@ -200,7 +200,7 @@ body, button, input {
   --background:  #212529;
   --guessBox: #343a40;
   --skip: #adb5bd;
-  --submit: #a7c957;
+  --submit: #a238ff;
   --suggestText: #e9ecef;
   --notSeconds: #6c757d;
   --seconds: #f8f9fa;

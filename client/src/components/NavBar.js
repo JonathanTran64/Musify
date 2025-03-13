@@ -243,7 +243,7 @@ const CloseButton = styled.button`
   border-radius: 3px;
   background-color: var(--submit);
   cursor: pointer;
-  color: var(--background);
+  color: var(--seconds);
   font-weight: bold;
   transition: opacity 0.1s;
 

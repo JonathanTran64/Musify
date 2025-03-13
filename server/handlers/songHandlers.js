@@ -203,7 +203,7 @@ const postCustom = async (req, res) => {
         // Check if the playlist link is empty
         if (playlistLink.trim() !== "") {
           const parts = playlistLink.split("/");
-          const playlistIdentifier = parts[4].split("?")[0];
+          const playlistIdentifier = parts[3].split("?")[0];
           extractedPlaylists.push(playlistIdentifier);
         }
       }

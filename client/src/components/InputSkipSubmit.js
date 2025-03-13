@@ -183,5 +183,6 @@ const SkipButtonLink = styled(SkipButton)`
 const SubmitButton = styled(SkipButton)`
   width: 100px;
   background-color: var(--submit);
+  color: var(--seconds);
 `;
 export default InputSkipSubmit;
